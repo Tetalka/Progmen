@@ -1,4 +1,5 @@
-Пишем по БЭМу (https://ru.bem.info/methodology/quick-start/)
+Пишем по БЭМу (https://ru.bem.info/methodology/quick-start/).
+Используем Webpack, SCSS, Pug.
 
 1. Основной дизайн (логотип, стиль, цветовая схема)
 2. Страница "Главная"
