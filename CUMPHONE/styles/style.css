@@ -1,0 +1,275 @@
+.CUMPHONE{
+    position:absolute;
+    top:0px;
+    left:500px;
+    height:560px;
+    width:800px;
+}
+
+.main-page {
+    width: 100%;
+    margin: 0;
+    background-color: #f7f7f7;
+    font-family: Oswald,Tahoma;
+    font-size: 12px;
+    background: green;
+}
+.content-holder-prime {
+    height:100%;
+    width:100%;
+    padding-bottom: -300px;
+}
+
+.header {
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    left:0;
+    right:0;
+    background-color: #7e7e7e;
+    height: 120px;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.77), rgba(0, 0, 0, 0.16));
+}
+.header__holder {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 1400px;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto auto;
+}
+.main-page__line {
+    width: 960px;
+    margin: 0 auto;
+    margin-top: 27px;
+}
+
+.logo {
+    width: 175px;
+    height: 60px;
+    top: 0;
+    right: 0;
+    bottom: 20px;
+    left: 0;
+    margin: auto 150px auto 0;
+}
+
+.menu
+{
+    height: 40px;
+    width:800px;
+    display:inline-block;
+    position: relative;
+    top:0;
+    right:0;
+    bottom:20px;
+    left:0;
+    margin: auto auto;
+}
+
+.menu__item {
+    font-family: Sen;
+    font-size: 22px;
+    line-height: 43px;
+    color: white;
+    margin: 0 20px;
+}
+.menu__image {
+    height:58px;
+    width:58px;
+    margin: 0 10px;
+    float:left;
+}
+
+.list {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    width: 1200px;
+    height: 300px;
+}
+.list__item-holder {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 500px;
+    height: 200px;
+}
+.list__item{
+    width:300px;
+    height:200px;
+
+}
+
+.page__content {
+    display: inline-block;
+    width: 100%;
+    height: 800px;
+    color: white;
+    position: relative;
+    top: 60px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0 auto;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.77), rgba(0, 0, 0, 0.1));
+}
+.page__content-holder {
+    padding: 0 250px 0 250px;
+    display:inline-block;
+    height:100%;
+    position:relative;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    margin: 60px auto;
+}
+
+.page__content-text {
+    color: white;
+    font-family: Sen;
+    font-size: 22px;
+    line-height: 43px;
+    text-align:center;
+}
+
+
+.page__content-img{
+    height: 200px;
+    width: 200px;
+    position: relative;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    margin: auto auto;
+    padding:  5px;
+}
+
+.footer{
+    padding-top:30px;
+    margin-top: -340px;
+    height:650px;
+    background-color: rgba(255, 255, 255, 0.51);
+    color: black;
+}
+.page__buffer{
+    height:60px;
+}
+
+/*ÃŒƒ»‘» ¿“Œ–€*/
+.flex-align-left{
+   align-items:flex-start;
+}
+.flex-align-right{
+    align-items:flex-end;
+}
+.flow-row{
+    flex-flow: row nowrap;
+}
+.flow-column{
+    flex-flow: column nowrap;
+}
+
+.list-low{
+    height:100px
+}
+.list-very-low{
+    height:50px
+}
+
+.border-top {
+    border-top: 2px solid rgba(0, 0, 0, 0.77);
+}
+
+.text-title{
+    margin: 30px 0;
+    font-size: 40px;
+}
+
+.img-big {
+    height: 400px;
+    width: 400px;
+    top: 50px;
+}
+
+.img-small {
+    float: left;
+    height: 100px;
+    width: 100px;
+}
+.img-very-small{
+    height:70px;
+    width:70px;
+    margin: 0;
+}
+
+.content-bottom {
+    position: relative;
+    height: 50px;
+    width: 600px;
+    top:350px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0 auto;
+}
+
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
+
+.content-left {
+    text-align: left;
+    width: 40%;
+    padding: 0 0 0 300px;
+}
+
+.menu-right {
+    float: right;
+    width: 400px;
+}
+
+.content-holder-small {
+    position: relative;
+    height: 250px;
+    width: 400px;
+    padding: 0;
+}
+
+.content-holder-big{
+    position:relative;
+    padding:0;
+    height: 400px;
+    width:100%;
+    display:flex;
+    flex-flow: row nowrap;
+    margin-bottom: -300px;
+}
+
+.link {
+    text-decoration: none;
+}
+.link:hover {
+    text-decoration: underline;
+}
+
+.buffer-for-footer{
+    height:400px;
+}
+
+.align-center{
+    position:relative;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    margin: auto auto;
+}
