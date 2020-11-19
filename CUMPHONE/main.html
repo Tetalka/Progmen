@@ -4,6 +4,7 @@
     <title>BEM-example</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script src="scripts/jquery.js"></script>
 </head>
 <body class="main-page">
     <div class="content-holder-prime">
@@ -28,7 +29,8 @@
 
         <div class="page__buffer"></div>
 
-        <div class="page__content">
+
+        <div class="page__content sl">
             <div class="page__content-holder-holder align-center">
                 <div class="page__content-holder content-left">
                     <a class="page__content-text text-left text-title">
@@ -47,6 +49,53 @@
                 </div>
                 <img class="CUMPHONE" src="images/CUMPHONE.png">
             </div>
+        </div>
+        <div class="page__content sl">
+            <div class="page__content-holder-holder align-center">
+                <div class="page__content-holder content-left">
+                    <a class="page__content-text text-left text-title">
+                        CUMPHONE 7751237581
+                    </a>
+                    <div class="page__content-text text-left">
+                        Screen: 120 Hz<br>
+                        Memory: 16 Gb RAM & 512 Gb ROM<br>
+                        Battery: 7000 MAh<br>
+                        Fast-charge: 30 Min to 100%<br>
+                        And many more....
+                    </div>
+                    <div class="page__content-text text-left text-title">
+                        ALREADY ON SALE!
+                    </div>
+                </div>
+                <img class="CUMPHONE" src="images/CUMPHONE.png">
+            </div>
+        </div>
+        <div class="page__content sl">
+            <div class="page__content-holder-holder align-center">
+                <div class="page__content-holder content-left">
+                    <a class="page__content-text text-left text-title">
+                        CUMPHONE 7wwqeqw
+                    </a>
+                    <div class="page__content-text text-left">
+                        Screen: 120 Hz<br>
+                        Memory: 16 Gb RAM & 512 Gb ROM<br>
+                        Battery: 7000 MAh<br>
+                        Fast-charge: 30 Min to 100%<br>
+                        And many more....
+                    </div>
+                    <div class="page__content-text text-left text-title">
+                        ALREADY ON SALE!
+                    </div>
+                </div>
+                <img class="CUMPHONE" src="images/CUMPHONE.png">
+            </div>
+        </div>
+
+
+        <div class="arrow left" onclick="slide('left')"><img src="images/ARROW.png"></div>
+        <div class="arrow right"onclick="slide('right')"><img src="images/ARROW.png"></div>
+
+        <div class="page__content">
         </div>
         <div class="page__content">
             <div class="page__content-holder-holder align-center">
@@ -164,14 +213,9 @@
             </div>
 
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <div class="page__buffer"></div>
+        <div class="page__buffer"></div>
+        <div class="page__buffer"></div>
         <div class="list list-very-low border-top align-center">
             <div class="list__item-holder list-very-low flex-align-left">
                 <div class="page__content-text">© 2010 - 2020 Veslo. All rights reserved</div>
@@ -181,5 +225,6 @@
             </div>
         </div>
     </div>
+    <script src="scripts/script.js"></script>
 </body>
 </html>
