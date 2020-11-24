@@ -1,8 +1,5 @@
-body{
-    color:white;
-    font-size:36px;
-    font-family: Sen;
-}
+
+
 div.background{
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 10.94%, rgba(61, 245, 168, 0.9) 100%);
     position:fixed;
@@ -12,73 +9,7 @@ div.background{
     left:0;
     z-index:-100;
 }
-.header {
-    z-index: 5;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #7e7e7e;
-    height: 120px;
-    width: 100%;
-    background: linear-gradient(to bottom,rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 7.81%, rgba(85, 223, 186, 1) 100%);
-}
-.header__holder {
-    display: flex;
-    flex-flow: row nowrap;
-    width: 1400px;
-    height: 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto auto;
-}
-.logo {
-    width: 175px;
-    height: 60px;
-    top: 0;
-    right: 0;
-    bottom: 20px;
-    left: 0;
-    margin: auto 150px auto 0;
-}
 
-.menu
-{
-    height: 40px;
-    width:800px;
-    display:inline-block;
-    position: relative;
-    top:0;
-    right:0;
-    bottom:20px;
-    left:0;
-    margin: auto auto;
-}
-.menu__item {
-    font-size: 22px;
-    line-height: 43px;
-    margin: 0 20px;
-}
-.menu__image {
-    height:58px;
-    width:58px;
-    margin: 0 10px;
-    float:left;
-}
-
-.list {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    width: 1200px;
-    height: 300px;
-}
-.menu-right {
-    float: right;
-    width: 400px;
-}
 form.filter{
     text-align:center;
     width:100%;
@@ -96,7 +27,7 @@ button.filter_search{
     text-align:center;
     width: 79px;
     height: 43px;
-
+	border: 0px;
     background: rgba(0, 255, 133, 0.63);
     border-radius: 10px;
 }
@@ -104,6 +35,7 @@ img.filter__pic{
     height:20px;
     width:20px;
 }
+
 div.phone{
     position:relative;
     width:80%;
@@ -145,7 +77,7 @@ input.phone__cost_buy{
     width: 319px;
     height: 72px;
     background: #49E0A0;
-    border: 3px solid;
+    border:3px solid;
     border-color:#359e72;
     box-sizing: border-box;
     border-radius: 19px;

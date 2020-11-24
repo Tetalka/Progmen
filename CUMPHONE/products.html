@@ -2,27 +2,54 @@
     <head>
         <title>Продукция</title>
         <link rel="stylesheet" href="styles/stylesForQuery.css">
+        <link rel="stylesheet" href="styles/main.css">
+		<link rel="shortcut icon" href="images/icon.png" type="image/png">
     </head>
-    <body>
+    <body class="body">
         <div class="background"></div>
+		
+		<div class="input-form align-center disabled">
+		<div class="input-form__background-blur align-center" onclick="changeLoginDisplay()"></div>
+		<div class="page__buffer"></div>
+			<div class="logo logo-input align-center" href="main.html">
+				<img src="images/VESLO.svg">
+			</div>
+		<div class="page__buffer"></div>
+		<div class="list align-center list-login">
+			<div class="list__item-holder buffer-for-footer">
+				<input class="input-form__input inplogin" placeholder="Login">
+				<input type="password" class="input-form__input password" placeholder="Password">
+				<input type="password" class="input-form__input password disabled" placeholder="Confirm Password">
+				<input type="button" class="input-form__button si link" value="SIGN IN" onclick="AUTHORISE()">
+				<a class="page__content-text text-small forgot-password link text-black"> FORGOT PASSWORD?</a>
+			
+				<a class="page__content-text text-title link text-black" onclick="changeSigning(this)"> REGISTRATION</a>
+			</div>
+		</div>
+	</div>
+		
 		<div class="header">
             <div class="header__holder">
-                <div class="logo">
+                <a class="logo" href="main.html">
                     <img src="images/VESLO.svg">
-                </div>
+                </a>
                 <div class="menu">
                     <a class="menu__item link" href="main.html">HOME</a>
-                    <a class="menu__item link">PRODUCTS</a>
-                    <a class="menu__item link">ABOUT US</a>
+                    <a class="menu__item link" href="products.html">PRODUCTS</a>
+                    <a class="menu__item link" href="about.html">ABOUT US</a>
                     <a class="menu__item link">SUPPORT</a>
                 </div>
                 <div class="menu menu-right">
                     <img class="menu__image" src="images/phone.svg">
                     <img class="menu__image" src="images/cart.svg">
-                    <a class="menu__item link">LOGIN</a>
+                    <a class="menu__item link" onclick="changeLoginDisplay()">LOGIN</a>
                 </div>
             </div>
         </div>
+		
+		<div class="page__buffer"></div>
+		
+		
         <form class="filter">
             <input type="text" class="filter__text">
             <button class="filter_search"><img src="images/searchIcon.png" class="filter__pic"></button>
@@ -57,6 +84,91 @@
                 <input class="phone__cost_buy" type="button" value="Buy it now">
             </div>
         </div>
+		
+		
+		<div class="page__buffer buffer-for-footer"></div>
+		
+		
+		<div class="footer">
+        <div class="list align-center">
+            <div class="list__item-holder flex-align-left">
+                <a class="page__content-text text-title">
+                    About Company
+                </a>
+                <a class="page__content-text">
+                    News
+                </a>
+                <a class="page__content-text">
+                    Events
+                </a>
+                <a class="page__content-text">
+                    Vacancy
+                </a>
+                <a class="page__content-text">
+                    For press
+                </a>
+            </div>
+
+            <div class="list__item-holder">
+                <a class="page__content-text text-title">
+                    Support
+                </a>
+                <a class="page__content-text">
+                    Delivery
+                </a>
+                <a class="page__content-text">
+                    Payment
+                </a>
+                <a class="page__content-text">
+                    Security
+                </a>
+            </div>
+
+            <div class="list__item-holder flex-align-right">
+                <a class="page__content-text text-title">
+                    Earn with us
+                </a>
+                <a class="page__content-text">
+                    Invest
+                </a>
+                <a class="page__content-text">
+                    Open shop
+                </a>
+                <a class="page__content-text">
+                    Referral program
+                </a>
+            </div>
+        </div>
+        <br>
+        <div class="list align-center list-low">
+            <div class="list__item-holder ">
+                <div class="page__content-text text-left">Follow our social media</div>
+                <div class="list__item-holder flow-row">
+                    <a><img class="menu__image img-very-small" src="images/FBicon.svg"></a>
+                    <a><img class="menu__image img-very-small" src="images/INSTicon.svg"></a>
+                    <a><img class="menu__image img-very-small" src="images/YTicon.svg"></a>
+                    <a><img class="menu__image img-very-small" src="images/TWITicon.svg"></a>
+                </div>
+            </div>
+            <div class="list__item-holder">
+                <div class="page__content-text text-right">information@veslo.corp</div>
+                <div class="page__content-text text-title text-right" style="margin-top:0">+7(925)385-61-23</div>
+            </div>
+
+        </div>
+        <div class="page__buffer"></div>
+        <div class="page__buffer"></div>
+        <div class="page__buffer"></div>
+        <div class="list list-very-low border-top align-center">
+            <div class="list__item-holder list-very-low flex-align-left">
+                <div class="page__content-text">© 2010 - 2020 Veslo. All rights reserved</div>
+            </div>
+            <div class="list__item-holder list-very-low flex-align-right">
+                <div class="page__content-text">Stay Safe Stay Home</div>
+            </div>
+        </div>
+    </div>
         <script src="scripts/helpMe.js"></script>
+        <script src="scripts/login.js"></script>
     </body>
 </html>
