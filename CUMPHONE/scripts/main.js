@@ -15,7 +15,7 @@ for (var i = 1; i < sliderElements.length; i++)
 }
 
 
-setInterval(increaseIndex, 3000);
+setInterval(increaseIndex, 6000);
 
 function increaseIndex(){
 	var inbex = currentIndex;
