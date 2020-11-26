@@ -1,6 +1,5 @@
 
-
-div.background{
+.background{
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 10.94%, rgba(61, 245, 168, 0.9) 100%);
     position:fixed;
     width:100%;
@@ -10,12 +9,12 @@ div.background{
     z-index:-100;
 }
 
-form.filter{
+.filter{
     text-align:center;
     width:100%;
     margin-top:120px;
 }
-input.filter__text{
+.filter__text{
     width:47%;
     font-size:29px;
     border: 2px solid #09AA5D;
@@ -23,7 +22,7 @@ input.filter__text{
     border-radius: 9px;
     line-height: 35px;
 }
-button.filter_search{
+.filter_search{
     text-align:center;
     width: 79px;
     height: 43px;
@@ -31,12 +30,16 @@ button.filter_search{
     background: rgba(0, 255, 133, 0.63);
     border-radius: 10px;
 }
-img.filter__pic{
+.filter__pic{
     height:20px;
     width:20px;
 }
 
-div.phone{
+.phones {
+	display: flex;
+	flex-direction: column;
+}
+.phone{
     position:relative;
     width:80%;
     height:290px;
@@ -49,22 +52,22 @@ div.phone{
     font-size:23px;
     line-height:28px;
 }
-div.phone__image{
+.phone__image{
     margin:11px 50px 15px 2%;
     width:224px;
     height:264px;
 }
-div.phone__name{
+.phone__name{
     font-size:32px;
     margin-top:18px;
     margin-bottom:18px;
 }
-div.phone__cost{
+.phone__cost{
     position:absolute;
     right:5%;
     top:38px;
 }
-div.phone__sum{
+.phone__sum{
     font-weight: bold;
     font-size: 48px;
     line-height: 58px;
@@ -73,7 +76,7 @@ div.phone__sum{
     text-align: center;
     margin-bottom:70px;
 }
-input.phone__cost_buy{
+.phone__cost_buy{
     width: 319px;
     height: 72px;
     background: #49E0A0;
@@ -87,37 +90,37 @@ input.phone__cost_buy{
     color:white;
 }
 @media(max-width:1440){
-    input.phone__cost_buy{
+    .phone__cost_buy{
         width: 300px;
         height: 68px;
     }
 }
 @media (max-width:1100px){
-    div.phone{
+    .phone{
         border-radius:34px;
         font-size:18px;
         line-height:23px;
     }
-    div.phone__image{
+    .phone__image{
         margin:11px 25px 15px 2%;
     }
-    div.phone__name{
+    .phone__name{
     font-size:28px;
     margin-top:18px;
     margin-bottom:16px;
 }
-    div.phone__cost{
+    .phone__cost{
         top:170px;
         right:2%;
     }
-    div.phone__sum{
+    .phone__sum{
        font-size: 37px;
        line-height: 47px;
        width: 289px;
        height: 40px;
        margin-bottom:10px;
     }
-    input.phone__cost_buy{
+    .phone__cost_buy{
       width: 290px;
        height: 60px;
        background: #49E0A0;
@@ -132,31 +135,31 @@ input.phone__cost_buy{
     }
 }
 @media (max-width:815px){
-    div.phone{
+    .phone{
         border-radius:34px;
         font-size:15px;
         line-height:20px;
     }
-    div.phone__image{
+    .phone__image{
         margin:11px 25px 15px 2%;
     }
-    div.phone__name{
+    .phone__name{
     font-size:25px;
     margin-top:18px;
     margin-bottom:18px;
 }
-    div.phone__cost{
+    .phone__cost{
         top:170px;
         right:2%;
     }
-    div.phone__sum{
+    .phone__sum{
        font-size: 37px;
        line-height: 47px;
        width: 289px;
        height: 40px;
        margin-bottom:10px;
     }
-    input.phone__cost_buy{
+    .phone__cost_buy{
       width: 290px;
        height: 60px;
        background: #49E0A0;
