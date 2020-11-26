@@ -180,6 +180,9 @@
     height: 800px;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 7.81%, rgba(85, 223, 186, 0.9) 100%);
 }
+.page__content_bottom{
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 7.81%, rgba(85, 223, 186, 0.9) 100%)
+}
 .page__content-holder {
     padding: 0 250px 0 250px;
     display:inline-block;
@@ -226,6 +229,7 @@
 	margin: 0 auto; 
 	border-right: 3px dotted rgba(0, 0, 0, 0.9);
 	border-left: 3px dotted rgba(0, 0, 0, 0.9);
+	border-bottom: 3px dotted rgba(0,0,0, 0.9);
 }
 
 
