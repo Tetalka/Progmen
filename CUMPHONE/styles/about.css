@@ -1,6 +1,8 @@
+/*=== последнее редактирование от пользователя Rizella 2:28 ===*/
+
 * {
 	margin: 0;
-	padding: 0;	
+	padding: 0;
 }
 
 @font-face {
@@ -13,8 +15,7 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-image: linear-gradient(rgba(41, 41, 41, 0.26), rgba(61, 245, 168, 0.26), rgba(85, 223, 186, 0.9)), url("images/low-angle-view-of-skyscrapers.png");
-    font-family: Sen-Regular;
+    background-image: linear-gradient(rgba(41, 41, 41, 0.26), rgba(61, 245, 168, 0.26), rgba(85, 223, 186, 0.9)), url("low-angle-view-of-skyscrapers 2.png");
 }
 
 .navbar {
@@ -73,11 +74,39 @@ body {
 /*=== end header ===*/
 
 .main-content {
-	margin-top: 100px;
+	margin-top: 120px;
 }
 
 .content-img {
 	width: 100%;
+	position: relative;
+}
+
+.headline-text-img {
+	position: absolute;
+	top: 200px;
+	margin-left: 30px;
+	width: 98%;
+}
+
+.headline-text-img span {
+	font-family: Sen-Regular;
+	color: white;
+	font-size: 52px;
+}
+
+.text-img {
+	position: absolute;
+	top: 800px;
+	
+	width: 100%;
+}
+
+.text-img span {
+	margin-left: 5px;
+	font-family: Sen-Regular;
+	color: white;
+	font-size: 41px;
 }
 
 .about {
