@@ -9,9 +9,9 @@ async function GetPhones() {
 	});
 	if(response.ok) {
 		var phones = await response.text();
+		phones = JSON.parse(phones);
 		if(phones) {
-			if(phones[0] == 'OK')
-			ShowPhones(phones[1]);
+			if(phones[0] == 'OK') ShowPhones(phones[1]);
 		}
 	}
 }
@@ -27,7 +27,8 @@ function ShowPhones(phones){
 		{	
 			image.classList.add('phone__image');
 			var img = document.createElement('img');
-			img.src = phones[i]['Image'];
+			if(phones[i]['Image'][0] == 'h') img.src = phones[i]['Image'];
+			else img.src = '/images/' + phones[i]['Image'];
 			image.appendChild(img);
 			phone.appendChild(image);
 		}
@@ -37,11 +38,11 @@ function ShowPhones(phones){
 		properties.classList.add('phone__properties');
 		{	
 			var classes = ['phone__name', 'phone__display', 'phone__processor', 'phone__rom', 'phone__ram', 'phone__camera'];
-			var values = ['Name', 'Display', 'Processor', 'ROM', 'RAM', 'Camera'];
+			var values = ['Model', 'Display', 'Processor', 'ROM', 'RAM', 'Camera'];
 			for(var j = 0; j < 6; j++) {
 				var block = document.createElement('div');
 				block.classList.add(classes[j]);
-				block.textContent = phones[i][vales[j]];
+				block.textContent = phones[i][values[j]];
 				properties.appendChild(block);
 			}
 			phone.appendChild(properties);
@@ -53,7 +54,7 @@ function ShowPhones(phones){
 		{
 			var value = document.createElement('div');
 			value.classList.add('phone__sum');
-			value.textContent = phones[i]['Price'];
+			value.textContent = phones[i]['Price'] + ' Р';
 			var buy = document.createElement('input');
 			buy.classList.add('phone__cost_buy');
 			buy.type = 'button';
@@ -63,6 +64,8 @@ function ShowPhones(phones){
 			phone.appendChild(price);
 		}
 		
-		document.querySelector('phones').appendChild(phone);
+		document.querySelector('.phones').appendChild(phone);
 	}
 }
+
+document.body.onload = GetPhones();
