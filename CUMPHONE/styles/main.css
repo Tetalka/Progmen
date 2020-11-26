@@ -85,6 +85,7 @@
 .content-holder-prime {
     height:100%;
     width:100%;
+	min-height: 1500px;
     padding-bottom: -300px;
 }
 
@@ -94,10 +95,9 @@
     top: 0;
     left: 0;
     right: 0;
-    background-color: #7e7e7e;
     height: 120px;
     width: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 7.81%, rgba(85, 223, 186, 0.9) 100%);
+    background-color: rgb(0, 0, 0);
 }
 .header__holder {
     display: flex;
@@ -447,4 +447,5 @@
 }
 .background-black{
 	background-color: black;
+	min-width: 1500px;
 }
