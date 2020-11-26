@@ -1,48 +1,160 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<link rel="stylesheet" type="text/css" href="styles/about.css">
+	<link rel="stylesheet" type="text/css" href="styles/main.css">
+		<link rel="shortcut icon" href="images/icon.png" type="image/png">
+		<script src="scripts/jquery.js"></script>
 </head>
-<body>
-<header class="navbar">
-	<div class="logo">
-		<img src="style/img/VESLO.png">
-	</div>
-	<div class="links">
-		<a href="">HOME</a>
-	  	<a href="">PRODUCTS</a>
-	  	<a href="">ABOUT US</a>
-	  	<a href="">SUPPORT</a>
-  	</div>
-  	<div class="user-area">
-  		<a class="img-link" href=""><img class="icon" src="style/img/img_217620 21.png"></a>
-  		<a class="img-link" href=""><img class="icon" src="style/img/orderIco 4.png"></a>
-  		<a class="login-link" href="">LOGIN</a>
-  	</div>
-</header>
-<section class="main-content">
-	<article class="big-img">
-		<img class="content-img" src="style/img/imagen-principal-home_0_0 1.png">
-	</article>
-	<article class="about">
-		<p class="headline-1">WHO WE ARE</p>
-		<p class="main-text">
-			The company Veslo was founded in 1995 by five friends and has since grown to a very large scale. We are creating smartphones that have the best hardware at the time of their release. We have more than 236,000 employees and operate in more than 170 countries, serving more than 5 billion people worldwide. We strive to provide digital technology to every person, home, so that everyone has access to information at any time.
-		</p>
-		<p class="headline-1">OUR MISSION</p>
-		<p class="main-text">
-			We strive to convey our ideals, namely: environmental friendliness, convenience, simplicity, so that all people who live even in the most remote corners of the world can improve their daily lives and enjoy modern amenities.
-		</p>
-	</article>
-	<article class="founders">
-		<p class="headline-3">FOUNDERS OF COMPANY</p>
-		<div class="team">
-			<img class="photo" src="style/img/dYDJj4_r3Kk 1.png">
-			<img class="photo" src="style/img/zy62JAnpItc 1.png">
-			<img class="photo" src="style/img/mMopWLGxk1U 1.png"><br>
-			<img class="photo" src="style/img/J3Xo26xZIhg 1.png">
-			<img class="photo" src="style/img/IMG_20201103_142624_1 1.png">
+<body style="background-image: linear-gradient(rgba(41, 41, 41, 0.26), rgba(61, 245, 168, 0.26), rgba(85, 223, 186, 0.9)), url(images/low-angle-view-of-skyscrapers.png);">
+
+		<div class="input-form align-center disabled">
+			<div class="input-form__background-blur align-center" onclick="changeLoginDisplay()"></div>
+			<div class="page__buffer"></div>
+				<div class="logo logo-input align-center" href="index.html">
+					<img src="images/VESLO.svg">
+				</div>
+			<div class="page__buffer"></div>
+			<div class="list align-center list-login">
+				<div class="list__item-holder buffer-for-footer">
+					<input class="input-form__input inplogin" placeholder="Login">
+					<input type="password" class="input-form__input password" placeholder="Password">
+					<input type="password" class="input-form__input password disabled" placeholder="Confirm Password">
+					<input type="button" class="input-form__button si link" value="SIGN IN" onclick="AUTHORISE()">
+					<a class="page__content-text text-small forgot-password link text-black"> FORGOT PASSWORD?</a>
+				
+					<a class="page__content-text text-title link text-black" onclick="changeSigning(this)"> REGISTRATION</a>
+				</div>
+			</div>
 		</div>
-	</article>
-</section>
+		<div class="header">
+            <div class="header__holder">
+                <a class="logo" href="index.html">
+                    <img src="images/VESLO.svg">
+                </a>
+                <div class="menu">
+                    <a class="menu__item link" href="index.html">HOME</a>
+                    <a class="menu__item link" href="products.html">PRODUCTS</a>
+                    <a class="menu__item link" href="about.html">ABOUT US</a>
+                    <a class="menu__item link">SUPPORT</a>
+                </div>
+                <div class="menu menu-right">
+                    <img class="menu__image" src="images/phone.svg">
+                    <img class="menu__image" src="images/cart.svg">
+                    <a class="menu__item link" onclick="changeLoginDisplay()">LOGIN</a>
+                </div>
+            </div>
+        </div>
+	<div class="content-holder-prime">
+	
+		<section class="main-content">
+			<article class="big-img">
+				<img class="content-img" src="images/imagen-principal-home_0_0.png">
+			</article>
+			<article class="about">
+				<p class="headline-1">WHO WE ARE</p>
+				<p class="main-text">
+					The company Veslo was founded in 1995 by five friends and has since grown to a very large scale. We are creating smartphones that have the best hardware at the time of their release. We have more than 236,000 employees and operate in more than 170 countries, serving more than 5 billion people worldwide. We strive to provide digital technology to every person, home, so that everyone has access to information at any time.
+				</p>
+				<p class="headline-1">OUR MISSION</p>
+				<p class="main-text">
+					We strive to convey our ideals, namely: environmental friendliness, convenience, simplicity, so that all people who live even in the most remote corners of the world can improve their daily lives and enjoy modern amenities.
+				</p>
+			</article>
+			<article class="founders">
+				<p class="headline-3">FOUNDERS OF COMPANY</p>
+				<div class="team">
+					<img class="photo" src="images/dYDJj4_r3Kk 1.png">
+					<img class="photo" src="images/zy62JAnpItc 1.png">
+					<img class="photo" src="images/mMopWLGxk1U 1.png"><br>
+					<img class="photo" src="images/J3Xo26xZIhg 1.png">
+					<img class="photo" src="images/IMG_20201103_142624_1 1.png">
+				</div>
+			</article>
+		</section>
+		
+		<div class="page__buffer buffer-for-footer"></div>
+	</div>
+		
+		
+	<div class="footer">
+        <div class="list align-center">
+            <div class="list__item-holder flex-align-left">
+                <a class="page__content-text text-title">
+                    About Company
+                </a>
+                <a class="page__content-text">
+                    News
+                </a>
+                <a class="page__content-text">
+                    Events
+                </a>
+                <a class="page__content-text">
+                    Vacancy
+                </a>
+                <a class="page__content-text">
+                    For press
+                </a>
+            </div>
+
+            <div class="list__item-holder">
+                <a class="page__content-text text-title">
+                    Support
+                </a>
+                <a class="page__content-text">
+                    Delivery
+                </a>
+                <a class="page__content-text">
+                    Payment
+                </a>
+                <a class="page__content-text">
+                    Security
+                </a>
+            </div>
+
+            <div class="list__item-holder flex-align-right">
+                <a class="page__content-text text-title">
+                    Earn with us
+                </a>
+                <a class="page__content-text">
+                    Invest
+                </a>
+                <a class="page__content-text">
+                    Open shop
+                </a>
+                <a class="page__content-text">
+                    Referral program
+                </a>
+            </div>
+        </div>
+        <br>
+        <div class="list align-center list-low">
+            <div class="list__item-holder ">
+                <div class="page__content-text text-left">Follow our social media</div>
+                <div class="list__item-holder flow-row">
+                    <a><img class="menu__image img-very-small" src="images/FBicon.svg"></a>
+                    <a><img class="menu__image img-very-small" src="images/INSTicon.svg"></a>
+                    <a><img class="menu__image img-very-small" src="images/YTicon.svg"></a>
+                    <a><img class="menu__image img-very-small" src="images/TWITicon.svg"></a>
+                </div>
+            </div>
+            <div class="list__item-holder">
+                <div class="page__content-text text-right">information@veslo.corp</div>
+                <div class="page__content-text text-title text-right" style="margin-top:0">+7(925)385-61-23</div>
+            </div>
+
+        </div>
+        <div class="page__buffer"></div>
+        <div class="page__buffer"></div>
+        <div class="page__buffer"></div>
+        <div class="list list-very-low border-top align-center">
+            <div class="list__item-holder list-very-low flex-align-left">
+                <div class="page__content-text">© 2010 - 2020 Veslo. All rights reserved</div>
+            </div>
+            <div class="list__item-holder list-very-low flex-align-right">
+                <div class="page__content-text">Stay Safe Stay Home</div>
+            </div>
+        </div>
+    </div>
+        <script src="scripts/navigation.js"></script>
 </body>
