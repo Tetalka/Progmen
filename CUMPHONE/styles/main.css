@@ -83,9 +83,8 @@
 }
 
 .content-holder-prime {
-    height:100%;
+    height: auto;
     width:100%;
-	min-height: 1500px;
 	min-width: 1500px;
     padding-bottom: -300px;
 }
@@ -231,7 +230,6 @@
 
 .footer{
     padding:30px 100px 0 100px;
-    margin-top: -340px;
     height:650px;
     background-color: rgb(255, 255, 255);
 	min-width:1300px;
@@ -281,7 +279,7 @@
 	background-color: inherit;
 }
 
-/*ÃŒƒ»‘» ¿“Œ–€*/
+/*√å√é√Ñ√à√î√à√ä√Ä√í√é√ê√õ*/
 
 .flex-align-left{
    align-items:flex-start;
@@ -449,4 +447,8 @@
 .background-black{
 	background-color: black;
 	min-width: 1500px;
+}
+
+.phones {
+    	margin-bottom: 50px;
 }
