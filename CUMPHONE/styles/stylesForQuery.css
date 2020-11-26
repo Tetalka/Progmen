@@ -36,6 +36,10 @@ img.filter__pic{
     width:20px;
 }
 
+div.phones {
+	display: flex;
+	flex-direction: column;
+}
 div.phone{
     position:relative;
     width:80%;
