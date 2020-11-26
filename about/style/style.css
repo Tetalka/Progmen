@@ -1,0 +1,128 @@
+* {
+	margin: 0;
+	padding: 0;	
+}
+
+@font-face {
+	font-family: Sen-Regular;
+    src: url(fonts/Sen-Regular.ttf);
+}
+
+body {
+	background: #141519;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: linear-gradient(rgba(41, 41, 41, 0.26), rgba(61, 245, 168, 0.26), rgba(85, 223, 186, 0.9)), url("img/low-angle-view-of-skyscrapers 2.png");
+    font-family: Sen-Regular;
+}
+
+.navbar {
+    overflow: hidden;
+    /*background-color: #333;*/
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100px;
+}
+
+.logo img{
+	display: block;
+	float: left;
+	height: 50px;
+	padding: 25px;
+}
+
+.links {
+	padding-left: 400px;
+}
+
+.links a {
+    float: left;
+    display: block;
+    color: white;
+    font-size: 36px;
+    text-decoration: none;
+    line-height: 100px;
+    padding-right: 45px;
+}
+
+.links a:hover {
+	text-decoration: underline;
+}
+
+.links a:last-child {
+	padding: 0;
+}
+
+.user-area {
+	float: right;
+}
+
+.login-link {
+	float: right;
+	display: block;
+    color: white;
+    font-size: 36px;
+    text-decoration: none;
+    line-height: 100px;
+    padding: 0 25px;
+}
+
+.icon {
+	float: right;
+	display: block;
+	float: left;
+	height: 40px;
+	padding: 30px 7px;
+}
+
+/*=== end header ===*/
+
+.main-content {
+	margin-top: 100px;
+}
+
+.content-img {
+	width: 100%;
+}
+
+.about {
+	margin: 100px 50px;
+}
+
+.headline-1 {
+	font-family: Sen-Regular;
+	color: white;
+	font-size: 52px;
+	text-align: center;
+	margin-top: 150px;
+}
+
+.main-text {
+	font-family: Sen-Regular;
+	color: white;
+	font-size: 38px;
+	text-align: justify;
+	margin-top: 50px;
+}
+
+.founders {
+	margin: 100px 50px 30px 50px;
+}
+
+.headline-3 {
+	font-family: Sen-Regular;
+	color: white;
+	font-size: 52px;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.team {
+	text-align: center;
+}
+
+.photo {
+	height: 370px;
+}
