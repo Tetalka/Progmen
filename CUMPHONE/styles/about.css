@@ -5,18 +5,17 @@
 	padding: 0;
 }
 
-@font-face {
-	font-family: Sen-Regular;
-    src: url(fonts/Sen-Regular.ttf);
-}
 
 body {
 	background: #141519;
+	width:100%;
+	min-width: 1500px;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-image: linear-gradient(rgba(41, 41, 41, 0.26), rgba(61, 245, 168, 0.26), rgba(85, 223, 186, 0.9)), url("low-angle-view-of-skyscrapers 2.png");
 }
+
 
 .navbar {
     overflow: hidden;
@@ -73,9 +72,6 @@ body {
 
 /*=== end header ===*/
 
-.main-content {
-	margin-top: 120px;
-}
 
 .content-img {
 	width: 100%;
@@ -96,10 +92,10 @@ body {
 }
 
 .text-img {
+	margin-left: 30px;
 	position: absolute;
-	top: 800px;
-	
-	width: 100%;
+	margin-top:30px;
+	width: 1000px;
 }
 
 .text-img span {
