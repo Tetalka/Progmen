@@ -1,4 +1,10 @@
 
 # HTID:15977485: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
-php_value display_errors 1
+php_value display_errors 0
+Options All -Indexes
+
+<Files .htaccess>
+Order allow,deny
+Deny from all
+</Files>
 # DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:15977485:
