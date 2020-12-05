@@ -40,7 +40,7 @@ function AUTHORISE(){
 }
 
 document.getElementsByClassName('logo logo-input align-center')[0].onclick = function() {
-window.location.href = 'main.html';
+window.location.href = 'index.html';
 };
 
 
