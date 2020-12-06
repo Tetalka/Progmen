@@ -4,10 +4,6 @@
 	$pass = 'Progaman4.5~';
 	$db = 'id15446174_progmen';
 
-function say($type, $message) {
-    echo json_encode([$type, $message]);
-}
-
 function getAll() {
     global $user, $pass, $db;
         $phones = array();
@@ -37,57 +33,7 @@ function getModel($model, $color) {
         global $user, $pass, $db;
         $link = database('localhost', $user, $pass, $db);
         if($result = $link->query("SELECT
-    Tempo.Model,
-    Tempo.Value,
-    Tempo.Color,
-    Tempo.Diagonal,
-        Tempo.Resolution,
-        Tempo.Display,
-        Tempo.Processor,
-        Tempo.ROM,
-        Tempo.RAM,
-        Tempo.Cores,
-        Tempo.Videoprocessor,
-        Tempo.Camera,
-        Tempo.`Front camera`,
-        Tempo.`Wireless interface`,
-        Tempo.`Unit of Wi-Fi`,
-        Tempo.`Numbers of SIM-card`,
-        Tempo.`Type of SIM`,
-        Tempo.Battery,
-        Tempo.Face_image,
-        Tempo.Price
-FROM
-    (
-    SELECT
-        Products.ID,
-        Products.Model AS Model,
-        Products.Diagonal,
-        Products.Resolution,
-        Products.Display,
-        Products.Processor,
-        Products.ROM,
-        Products.RAM,
-        Products.Cores,
-        Products.Videoprocessor,
-        Products.Camera,
-        Products.`Front camera`,
-        Products.`Wireless interface`,
-        Products.`Unit of Wi-Fi`,
-        Products.`Numbers of SIM-card`,
-        Products.`Type of SIM`,
-        Products.Battery,
-        Products.Face_image,
-        Products.Price,
-        Products_images.ID_Model,
-        Products_images.ID_Image,
-        ProductsImages.Value,
-        ProductsImages.Color
-    FROM
-        Products_images
-    JOIN Products ON Products_images.ID_Model = Products.ID
-    JOIN ProductsImages ON Products_images.ID_Image = ProductsImages.ID
-) AS Tempo WHERE Tempo.Color = '" . $color . "' AND Tempo.Model = '" . $model . "' ;")) {
+    * FROM Phones WHERE Model = '" . $model . "' ;")) {
             if($result == null) {
                return 'Model_doesn\'t_exist'; 
             }
@@ -96,9 +42,11 @@ FROM
                 $phone->Model = $model;
                 $phone->Color = $color;
                 $images = array();
+                $colors = array();
                 $i = 0;
                 while($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                    $images[$i] = $row['Value'];
+                    if($row['Color'] == $color) $images[count($images)] = $row['Value'];
+                    if(!arrayContains($colors, $row['Color'])) $colors[$i] = $row['Color'];
                     $phone->Diagonal = $row['Diagonal'];
                     $phone->Resolution = $row['Resolution'];
                     $phone->Display = $row['Display'];
@@ -119,6 +67,7 @@ FROM
                     $i++;
                 }
                 $phone->Images = $images;
+                $phone->Colors = $colors;
                 return $phone;
             }
         }
@@ -126,11 +75,6 @@ FROM
             say('Error', 'Server_error');
     	    writeError('Query error (' . $link->errno . ') ' . $link->error);
         }
-    }
-function writeError($error) {
-    	$log = fopen('Errors.log', 'a');
-    	fwrite($log, "\n" . date('F, D, \D\a\y j, H:i:s: ') . $error . '.');
-    	fclose($log);
     }
 
 $request = file_get_contents('php://input');

@@ -28,19 +28,51 @@ function changeSigning(sender){
 	}
 }
 
+async function Post(type, data) {
+	var response = await fetch('Users.php',{
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({type: type, data})
+	});
+	if(response.ok) {
+		var answer = await response.text();
+		answer = JSON.parse(answer);
+		if(answer) {
+			if(answer[0] == 'OK') {changeLoginDisplay(); OnAuthorise(answer[1]['Login'])};
+		}
+	}
+}
+
+function OnAuthorise(login) {
+    document.querySelector('.input-form__input.inplogin').value = '';
+    document.querySelector('.input-form__input.password').value = '';
+    document.querySelectorAll('.input-form__input.password')[1].value = '';
+    document.querySelector('.login').parentNode.removeChild(document.querySelector('.login'));
+    var login_block = document.createElement('div');
+    login_block.classList.add('menu__item');
+    login_block.classList.add('login');
+    login_block.textContent = login;
+    document.querySelector('.menu.menu-right').appendChild(login_block);
+}
 
 function AUTHORISE(){
-	if (signinSignupButton.classList[2] == 'si') {
-		alert(loginField.value);
-		//вот тут че будет при входе
+	if (signinSignupButton.classList[2] == 'si' || signinSignupButton.classList[1] == 'si') {
+	    var login = document.querySelector('.input-form__input.inplogin').value;
+	    var password = document.querySelector('.input-form__input.password').value;
+        Post('Users', {action: 'sign in', Login: login, Password: password});
 	}
 	else if (signinSignupButton.classList[2] == 'su') {
-		//вот тут че будет при регистрации
+	    var login = document.querySelector('.input-form__input.inplogin').value;
+	    var password = document.querySelector('.input-form__input.password').value;
+	    var vpassword = document.querySelectorAll('.input-form__input.password')[1].value;
+	    Post('Users', {action: 'sign up', Login: login, Password: password, VPassword: vpassword});
 	}
 }
 
 document.getElementsByClassName('logo logo-input align-center')[0].onclick = function() {
-window.location.href = 'main.html';
+window.location.href = 'index.html';
 };
 
 

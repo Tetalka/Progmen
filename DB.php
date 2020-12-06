@@ -19,4 +19,21 @@ function database($url, $user, $pass, $db) {
         }
     return $link;
 };
+
+function arrayContains($array, $string) {
+    for($i = 0; $i < count($array); $i++) {
+        if($array[$i] == $string) return true;
+    }
+    return false;
+}
+
+function say($type = null, $message = null) {
+    echo json_encode([$type, $message]);
+}
+
+function writeError($error) {
+    	$log = fopen('Errors.log', 'a');
+    	fwrite($log, "\n" . date('F, D, \D\a\y j, H:i:s: ') . $error . '.');
+    	fclose($log);
+}
 ?>
