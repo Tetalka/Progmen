@@ -43,10 +43,14 @@ function getModel($model, $color) {
                 $phone->Color = $color;
                 $images = array();
                 $colors = array();
+                $colorsCode = array();
                 $i = 0;
                 while($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                    if($row['Color'] == $color) $images[count($images)] = $row['Value'];
-                    if(!arrayContains($colors, $row['Color'])) $colors[$i] = $row['Color'];
+                    if($row['Color'] == $color && strpos($row['Path'], 'main') === false) $images[count($images)] = $row['Path'];
+                    if(!arrayContains($colors, $row['Color'])) {
+                        $colors[$i] = $row['Color'];
+                        $colorsCode[$i] = $row['Value'];
+                    }
                     $phone->Diagonal = $row['Diagonal'];
                     $phone->Resolution = $row['Resolution'];
                     $phone->Display = $row['Display'];
@@ -62,12 +66,16 @@ function getModel($model, $color) {
                     $phone->Numbers_of_SIMCard = $row['Numbers of SIM-card'];
                     $phone->Type_of_SIM = $row['Type of SIM'];
                     $phone->Battery = $row['Battery'];
-                    $phone->Face_image = $row['Face_image'];
+                    if($color != $row['MainColor']) {
+                        if(strpos($row['Path'], 'main') !== false && $color == $row['Color']) $phone->Face_image = $row['Path'];
+                    }
+                    else $phone->Face_image = $row['Face_image'];
                     $phone->Price = $row['Price'];
                     $i++;
                 }
                 $phone->Images = $images;
                 $phone->Colors = $colors;
+                $phone->Colors_value = $colorsCode;
                 return $phone;
             }
         }

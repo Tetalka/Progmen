@@ -74,7 +74,7 @@ var phones = await GetPhones({model: 'all'});
 		{
 			var value = document.createElement('div');
 			value.classList.add('phone__sum');
-			value.textContent = phones[i]['Price'] + ' ?';
+			value.textContent = phones[i]['Price'] + ' ₽';
 			var buy = document.createElement('input');
 			buy.classList.add('phone__cost_buy');
 			buy.type = 'button';
@@ -88,8 +88,8 @@ var phones = await GetPhones({model: 'all'});
 	}
 }
 
-async function ShowPhone(model) {
-	var phone = await GetPhones({model: model, color: 'Black',});
+async function ShowPhone(model, color = null) {
+	var phone = await GetPhones({model: model, color: color,});
 	
 	//phone page
 	var block = document.createElement('div');
@@ -130,13 +130,47 @@ async function ShowPhone(model) {
 	image.classList.add('phone-page__main-image');
 	image.src = GetSrc(phone['Face_image']);
 	main_image_column.appendChild(image);
+	//phone color selecting
+	var color_block = document.createElement('div');
+	color_block.classList.add('phone-page__colors');
+	for(var i = 0; i < phone['Colors'].length; i++) {
+	    let div = document.createElement('div');
+	    div.classList.add('phone-page__color-block');
+	    let box = document.createElement('div');
+	    box.classList.add('phone-page__color-box');
+	    let color = document.createElement('div')
+	    color.classList.add('phone-page__color');
+	    color.style.backgroundColor = phone['Colors_value'][i];
+	    box.appendChild(color);
+	    div.appendChild(box);
+	    let value = GetElement('span', 'phone-page__color-value', phone['Colors'][i]);
+	    div.appendChild(value);
+	    let title = phone['Model'];
+	    div.addEventListener('click', () => {UpdatePhonePage(title, value.textContent);});
+	    div.addEventListener('mouseover', () => {
+	        box.classList.add('phone-page__color-box_active');
+	        color.classList.add('phone-page__color_active');
+	        //value.classList.add('phone-page__color-value_active');
+	        box.style.borderColor = color.style.backgroundColor;
+	        value.style.color = color.style.backgroundColor;
+	    });
+	    div.addEventListener('mouseout', () => {
+	        box.classList.remove('phone-page__color-box_active');
+	        color.classList.remove('phone-page__color_active');
+	        //value.classList.remove('phone-page__color-value_active'); 
+	        box.style.borderColor = '';
+	        value.style.color = '';
+	    });
+	    color_block.appendChild(div);
+	}
+	main_image_column.appendChild(color_block);
 	block.appendChild(main_image_column);
 	
 	//phone info
 	var info_column = document.createElement('div');
 	info_column.classList.add('phone-page__info-column');
 	{
-		var title = GetElement('h2', 'phone-page__title', phone['Model']);
+		let title = GetElement('h2', 'phone-page__title', phone['Model']);
 		info_column.appendChild(title);
 		
 		//screen block
@@ -238,7 +272,7 @@ async function ShowPhone(model) {
 	var panel = document.createElement('div');
 	panel.classList.add('phone-page__panel-column');
 	var buy = GetElement('div', 'phone-page__buy', null);
-	var buy_price = GetElement('span', 'phone-page__price', phone['Price'] + ' ?');
+	var buy_price = GetElement('span', 'phone-page__price', phone['Price'] + ' ₽');
 	buy.appendChild(buy_price);
 	var buy_button = GetElement('button', 'phone-page__buy-button', 'Buy it now');
 	buy.appendChild(buy_button);
@@ -259,6 +293,14 @@ async function ShowPhone(model) {
 	block.appendChild(exit);
 	
 	document.body.appendChild(block);
+}
+
+async function UpdatePhonePage(model, color) {
+    let phonepages = document.querySelectorAll('.phone-page');
+    for(let i = 0; i < phonepages.length; i++) {
+        phonepages[i].parentNode.removeChild(phonepages[i]);
+    }
+    ShowPhone(model, color);
 }
 
 document.body.onload = ShowPhones();
