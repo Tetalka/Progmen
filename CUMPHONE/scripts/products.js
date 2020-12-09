@@ -35,21 +35,21 @@ var phones = await GetPhones({model: 'all'});
 		//phone
 		var phone = document.createElement('div');
 		phone.classList.add('phone');
-		
+
 		//phone image
 		var image = document.createElement('div');
-		{	
+		{
 			image.classList.add('phone__image');
 			var img = document.createElement('img');
 			img.src = GetSrc(phones[i]['Face_image']);
 			image.appendChild(img);
 			phone.appendChild(image);
 		}
-		
+
 		//phone properties
 		var properties = document.createElement('div');
 		properties.classList.add('phone__properties');
-		{	
+		{
 			var classes = ['phone__name', 'phone__display', 'phone__processor', 'phone__rom', 'phone__ram', 'phone__camera'];
 			var values = ['Model', 'Display', 'Processor', 'ROM', 'RAM', 'Camera'];
 				var model = document.createElement('div');
@@ -67,7 +67,7 @@ var phones = await GetPhones({model: 'all'});
 			}
 			phone.appendChild(properties);
 		}
-		
+
 		//phone price
 		var price = document.createElement('div');
 		price.classList.add('phone__cost');
@@ -83,18 +83,21 @@ var phones = await GetPhones({model: 'all'});
 			price.appendChild(buy);
 			phone.appendChild(price);
 		}
-		
+
+		phone.addEventListener('click', function() {
+			ShowPhone(this.childNodes[1].childNodes[0].textContent);
+		});
 		document.querySelector('.phones').appendChild(phone);
 	}
 }
 
 async function ShowPhone(model, color = null) {
 	var phone = await GetPhones({model: model, color: color,});
-	
+
 	//phone page
 	var block = document.createElement('div');
 	block.classList.add('phone-page');
-	
+
 	//phone images (slider)
 	var images_column = document.createElement('div');
 	images_column.classList.add('phone-page__images-column');
@@ -122,7 +125,7 @@ async function ShowPhone(model, color = null) {
 		images_column.appendChild(image);
 	}
 	block.appendChild(images_column);
-	
+
 	//phone main image
 	var main_image_column = document.createElement('div');
 	main_image_column.classList.add('phone-page__main-image-column');
@@ -157,7 +160,7 @@ async function ShowPhone(model, color = null) {
 	    div.addEventListener('mouseout', () => {
 	        box.classList.remove('phone-page__color-box_active');
 	        color.classList.remove('phone-page__color_active');
-	        //value.classList.remove('phone-page__color-value_active'); 
+	        //value.classList.remove('phone-page__color-value_active');
 	        box.style.borderColor = '';
 	        value.style.color = '';
 	    });
@@ -165,14 +168,14 @@ async function ShowPhone(model, color = null) {
 	}
 	main_image_column.appendChild(color_block);
 	block.appendChild(main_image_column);
-	
+
 	//phone info
 	var info_column = document.createElement('div');
 	info_column.classList.add('phone-page__info-column');
 	{
 		let title = GetElement('h2', 'phone-page__title', phone['Model']);
 		info_column.appendChild(title);
-		
+
 		//screen block
 		var screen_block = document.createElement('div');
 		screen_block.classList.add('phone-page__info-block');
@@ -191,7 +194,7 @@ async function ShowPhone(model, color = null) {
 		display.appendChild(display_value);
 		screen_block.appendChild(display);
 		info_column.appendChild(screen_block);
-		
+
 		//memory and processor block
 		var memory_block = document.createElement('div');
 		memory_block.classList.add('phone-page__info-block');
@@ -218,7 +221,7 @@ async function ShowPhone(model, color = null) {
 		videoproc.appendChild(videoproc_value);
 		memory_block.appendChild(videoproc);
 		info_column.appendChild(memory_block);
-		
+
 		//camera block
 		var camera_block = document.createElement('div');
 		camera_block.classList.add('phone-page__info-block');
@@ -233,7 +236,7 @@ async function ShowPhone(model, color = null) {
 		frontCum.appendChild(frontCum_value);
 		camera_block.appendChild(frontCum);
 		info_column.appendChild(camera_block);
-		
+
 		//communication block
 		var communication_block = document.createElement('div');
 		communication_block.classList.add('phone-page__info-block');
@@ -256,7 +259,7 @@ async function ShowPhone(model, color = null) {
 		typesim.appendChild(typesim_value);
 		communication_block.appendChild(typesim);
 		info_column.appendChild(communication_block);
-		
+
 		//battery block
 		var battery_block = document.createElement('div');
 		battery_block.classList.add('phone-page__info-block');
@@ -267,7 +270,7 @@ async function ShowPhone(model, color = null) {
 		info_column.appendChild(battery_block);
 	}
 	block.appendChild(info_column);
-	
+
 	//panel
 	var panel = document.createElement('div');
 	panel.classList.add('phone-page__panel-column');
@@ -284,14 +287,14 @@ async function ShowPhone(model, color = null) {
 	notify.appendChild(notify_button);
 	panel.appendChild(notify);
 	block.appendChild(panel);
-	
+
 	//exit button
 	var exit = GetElement('button', 'phone-page__exit', 'X');
 	exit.addEventListener('click', function() {
 	    document.body.removeChild(document.querySelector('.phone-page'));
 	});
 	block.appendChild(exit);
-	
+
 	document.body.appendChild(block);
 }
 
