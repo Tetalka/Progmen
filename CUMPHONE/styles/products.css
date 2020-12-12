@@ -38,6 +38,10 @@
     object-fit: contain;
     border-radius: 15px;
     border: 1px solid black;
+    transition: transform 300ms ease;
+}
+.phone-page__image:hover {
+    transform: scale(1.05);
 }
 .phone-page__image_active {
     border: 2px solid #999;

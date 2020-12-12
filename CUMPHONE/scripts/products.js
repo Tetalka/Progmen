@@ -32,7 +32,7 @@ async function GetPhones(object, page = null, theme = 'white') {
 		let phones = await response.text();
 		phones = JSON.parse(phones);
 		if(phones) {
-			if(loading) hideLoading(page, loading);
+			if(loading) hideLoading(loading);
 			if(phones[0] == 'OK') return(phones[1]);
 		}
 	}
@@ -57,8 +57,8 @@ function showLoading(page, theme) {
 	return loading;
 }
 
-function hideLoading(page, loading) {
-	page.removeChild(loading);
+function hideLoading(loading) {
+	loading.parentNode.removeChild(loading);
 }
 
 async function ShowPhones(){
@@ -143,7 +143,7 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 	let image_main_loading = showLoading(image_main_placeholder, 'black');
 	image_main_wrap.appendChild(image_main_placeholder);
 	image_main.onload = () => {
-		hideLoading(image_main_placeholder, image_main_loading);
+		hideLoading(image_main_loading);
 		image_main_wrap.removeChild(image_main_placeholder);
 		image_main.classList.add('phone-page__image_active');
 	}
@@ -164,7 +164,7 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 		let image_loading = showLoading(image_placeholder, 'black');
 		image_wrap.appendChild(image_placeholder);
 		image.onload = () => {
-			hideLoading(image_placeholder, image_loading);
+			hideLoading(image_loading);
 			image_wrap.removeChild(image_placeholder);
 		}
 		image_wrap.appendChild(image);
@@ -183,7 +183,7 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 	let main_image_loading = showLoading(main_image_placeholder, 'black');
 	main_image_wrap.appendChild(main_image_placeholder);
 	image.onload = () => {
-		hideLoading(main_image_placeholder, main_image_loading);
+		hideLoading(main_image_loading);
 		main_image_wrap.removeChild(main_image_placeholder);
 	}
 	main_image_wrap.appendChild(image);
