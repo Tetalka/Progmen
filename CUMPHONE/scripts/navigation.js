@@ -2,26 +2,27 @@ var inputForm = document.getElementsByClassName('input-form')[0];
 
 function changeLoginDisplay(){
 	inputForm.classList.toggle("disabled");
-	eraseError();
+	clearSay();
 }
 
 
 var loginField = document.getElementsByClassName('inplogin')[0];
-loginField.onchange = () => {eraseError();}
+loginField.onchange = () => {clearSay();}
 var passwordField = document.getElementsByClassName('password')[0];
-passwordField.onchange = () => {eraseError();}
+passwordField.onchange = () => {clearSay();}
 var confirmPasswordField = document.getElementsByClassName('password')[1];
-confirmPasswordField.onchange = () => {eraseError();}
+confirmPasswordField.onchange = () => {clearSay();}
 var passwordResetText = document.getElementsByClassName('forgot-password')[0];
 
-var signinSignupButton = document.getElementsByClassName('input-form__button')[0];
+var signinSignupButton = document.querySelector('.input-form__button');
 
 
-function changeSigning(sender){
+function changeSigning(){
 	confirmPasswordField.classList.toggle('disabled');
 	passwordResetText.classList.toggle('disabled');
 	signinSignupButton.classList.toggle('si');
 	signinSignupButton.classList.toggle('su');
+	let sender = document.querySelector('.page__content-text.text-title.link');
 	if (signinSignupButton.classList[2] == 'si') {
 		signinSignupButton.value = "SIGN IN";
 		sender.innerHTML = "REGISTRATION";
@@ -30,7 +31,7 @@ function changeSigning(sender){
 		signinSignupButton.value = "SIGN UP";
 		sender.innerHTML = "SIGN IN";
 	}
-	eraseError();
+	clearSay();
 }
 
 async function Post(type, data) {
@@ -39,15 +40,19 @@ async function Post(type, data) {
     headers: {
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify({type: type, data})
+    body: JSON.stringify({Type: type, data})
 	});
 	if(response.ok) {
 		var answer = await response.text();
 		answer = JSON.parse(answer);
 		if(answer) {
 			if(answer['Type'] == 'Authorisation') {changeLoginDisplay(); OnAuthorise(answer['Value']['Login'])}
-			else if (answer['Type'] == 'Registration') OnRegistation();
-			else if(answer['Type'] == 'Error') SayBefore(answer['Value']);
+			else if (answer['Type'] == 'Registration') OnRegistration();
+			else if(answer['Type'] == 'Error') {
+			    SayBefore(answer['Value']['Value']);
+			    clearPasswords();
+			    
+			}
 		}
 	}
 }
@@ -64,25 +69,41 @@ function OnAuthorise(login) {
     document.querySelector('.menu.menu-right').appendChild(login_block);
 }
 
-function onRegistration() {
+function OnRegistration() {
     document.querySelector('.input-form__input.inplogin').value = '';
     document.querySelector('.input-form__input.password').value = '';
     document.querySelectorAll('.input-form__input.password')[1].value = '';
-    SayBefore('Succesful registration');
+    changeSigning();
+    SayBefore('Succesful registration', undefined, true);
 }
 
-function SayBefore(text, elemSelector = '.input-form__button') {
-    eraseError();
-    let message = document.createElement('div');
-    message.classList.add('input-form__message');
-    message.textContent = text;
+function SayBefore(text, elemSelector = '.input-form__button', status = false) {
+    clearSay();
+    let block = document.createElement('div');
+    block.classList.add('input-form__message-block');
+    if(!status) block.classList.add('input-form__message_error');
+    else block.classList.add('input-form__message_good');
+    if(Array.isArray(text)) {
+        for (let i = 0; i < text.length; i++) {
+        let message = document.createElement('span');
+        message.classList.add('input-form__message');
+        message.textContent = text[i];
+        block.appendChild(message);
+        }
+    }
+    else block.textContent = text;
     let button = document.querySelector(elemSelector);
-    button.before(message);
+    button.before(block);
 }
 
-function eraseError() {
-    let message = document.querySelector('.input-form__message');
+function clearSay() {
+    let message = document.querySelector('.input-form__message-block');
     if(message) message.parentNode.removeChild(message);
+}
+
+function clearPasswords() {
+    document.querySelector('.input-form__input.password').value = '';
+    document.querySelectorAll('.input-form__input.password')[1].value = '';
 }
 
 function isFilled(fields) {
@@ -100,9 +121,9 @@ function AUTHORISE(){
         else SayBefore('Fill in all fields');
 	}
 	else if (signinSignupButton.classList[2] == 'su') {
-	    var login = document.querySelector('.input-form__input.inplogin').value;
-	    var password = document.querySelector('.input-form__input.password').value;
-	    var vpassword = document.querySelectorAll('.input-form__input.password')[1].value;
+	    var login = document.querySelector('.input-form__input.inplogin').value.substring(0, 55);
+	    var password = document.querySelector('.input-form__input.password').value.substring(0 ,55);
+	    var vpassword = document.querySelectorAll('.input-form__input.password')[1].value.substring(0 ,55);
 	    if(isFilled([login, password, vpassword])) {
 	        if(password === vpassword) Post('Users', {Action: 'Sign up', Login: login, Password: password, VPassword: vpassword});
 	        else SayBefore('Passwords don\'t match');

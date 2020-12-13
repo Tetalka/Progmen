@@ -54,11 +54,24 @@
 	z-index: -3;
 }
 
-.input-form__message {
-    color: #840f0f;
+.input-form__message-block {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
+.input-form__message {
+    margin-bottom: 10px;
+}
+
+.input-form__message_error {
+    color: #840f0f;
+}
+
+.input-form__message_good {
+    color: #0c6200;
+}
 
 
 

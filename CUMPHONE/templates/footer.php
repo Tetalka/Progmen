@@ -1,66 +1,5 @@
 <html>
-    <head>
-        <title>Progmen</title>
-        <link rel="stylesheet" href="styles/main.css">
-        <link rel="stylesheet" href="styles/stylesForQuery.css">
-        <link rel="stylesheet" href="styles/products.css">
-		<link rel="shortcut icon" href="images/icon.png" type="image/png">
-		<script src="scripts/jquery.js"></script>
-    </head>
-    <body class="body">
-        <div class="background"></div>
-
-		<div class="input-form align-center disabled">
-		<div class="input-form__background-blur align-center" onclick="changeLoginDisplay()"></div>
-
-			<div class="logo logo-input align-center" href="index.html">
-				<img src="images/VESLO.svg">
-			</div>
-		<div class="list align-center list-login">
-			<div class="list__item-holder buffer-for-footer">
-				<input class="input-form__input inplogin" placeholder="Login">
-				<input type="password" class="input-form__input password" placeholder="Password">
-				<input type="password" class="input-form__input password disabled" placeholder="Confirm Password">
-				<input type="button" class="input-form__button si link" value="SIGN IN" onclick="AUTHORISE()">
-				<a class="page__content-text text-small forgot-password link text-black"> FORGOT PASSWORD?</a>
-
-				<a class="page__content-text text-title link text-black" onclick="changeSigning(this)"> REGISTRATION</a>
-			</div>
-		</div>
-	</div>
-
-	<div class="content-holder-prime">
-		<div class="header">
-            <div class="header__holder">
-                <a class="logo" href="index.html">
-                    <img src="images/VESLO.svg">
-                </a>
-                <div class="menu">
-                    <a class="menu__item link" href="index.html">HOME</a>
-                    <a class="menu__item link" href="products.html">PRODUCTS</a>
-                    <a class="menu__item link" href="about.html">ABOUT US</a>
-                    <a class="menu__item link">SUPPORT</a>
-                </div>
-                <div class="menu menu-right">
-                    <img class="menu__image" src="images/phone.svg">
-                    <img class="menu__image" src="images/cart.svg">
-                    <a class="menu__item link login" onclick="changeLoginDisplay()">LOGIN</a>
-                </div>
-            </div>
-        </div>
-
-
-
-        <form class="filter">
-            <input type="text" class="filter__text">
-            <button class="filter_search"><img src="images/searchIcon.png" class="filter__pic"></button>
-        </form>
-		<div class='phones'>
-
-		</div>
-	</div>
-
-		<div class="footer">
+<div class="footer">
         <div class="list align-center">
             <div class="list__item-holder flex-align-left">
                 <a class="page__content-text text-title">
@@ -123,7 +62,7 @@
             </div>
             <div class="list__item-holder">
                 <div class="page__content-text text-right">information@veslo.corp</div>
-                <div class="page__content-text text-title text-right" style="margin-top:55">+7(925)385-61-23</div>
+                <div class="page__content-text text-title text-right" style="margin-top:70">+7(925)385-61-23</div>
             </div>
 
         </div>
@@ -138,8 +77,5 @@
                 <div class="page__content-text">Stay Safe Stay Home</div>
             </div>
         </div>
-    </div>
-        <script src="scripts/products.js"></script>
-        <script src="scripts/navigation.js"></script>
-    </body>
 </html>
+    </div>

@@ -8,45 +8,15 @@
 	<link rel="shortcut icon" href="images/icon.png" type="image/png">
 </head>
 <body class="body">
-	<div class="input-form align-center disabled">
-		<div class="input-form__background-blur align-center" onclick="changeLoginDisplay()"></div>
-		
-			<div class="logo logo-input align-center" href="index.html">
-				<img src="images/VESLO.svg">
-			</div>
-		<div class="list align-center list-login">
-			<div class="list__item-holder buffer-for-footer">
-				<input class="input-form__input inplogin" placeholder="Login">
-				<input type="password" class="input-form__input password" placeholder="Password">
-				<input type="password" class="input-form__input password disabled" placeholder="Confirm Password">
-				<input type="button" class="input-form__button si link" value="SIGN IN" onclick="AUTHORISE()">
-				<a class="page__content-text text-small forgot-password link text-black"> FORGOT PASSWORD?</a>
-			
-				<a class="page__content-text text-title link text-black" onclick="changeSigning(this)"> REGISTRATION</a>
-			</div>
-		</div>
-	</div>
+	<?php
+	require 'templates/login_form.php';
+	?>
 	
 
     <div class="content-holder-prime">
-        <div class="header">
-            <div class="header__holder">
-                <a class="logo" href="index.html">
-                    <img src="images/VESLO.svg">
-                </a>
-                <div class="menu">
-                    <a class="menu__item link" href="index.html">HOME</a>
-                    <a class="menu__item link" href="products.html">PRODUCTS</a>
-                    <a class="menu__item link" href="about.html">ABOUT US</a>
-                    <a class="menu__item link">SUPPORT</a>
-                </div>
-                <div class="menu menu-right">
-                    <img class="menu__image" src="images/phone.svg">
-                    <img class="menu__image" src="images/cart.svg">
-                    <a class="menu__item link login" onclick="changeLoginDisplay()">LOGIN</a>
-                </div>
-            </div>
-        </div>
+        <?php 
+        require 'templates/header.php';
+        ?>
 
 
 
@@ -147,85 +117,9 @@
             </div>
         </div>
 	
-    <div class="footer">
-        <div class="list align-center">
-            <div class="list__item-holder flex-align-left">
-                <a class="page__content-text text-title">
-                    About Company
-                </a>
-                <a class="page__content-text">
-                    News
-                </a>
-                <a class="page__content-text">
-                    Events
-                </a>
-                <a class="page__content-text">
-                    Vacancy
-                </a>
-                <a class="page__content-text">
-                    For press
-                </a>
-            </div>
-
-            <div class="list__item-holder">
-                <a class="page__content-text text-title">
-                    Support
-                </a>
-                <a class="page__content-text">
-                    Delivery
-                </a>
-                <a class="page__content-text">
-                    Payment
-                </a>
-                <a class="page__content-text">
-                    Security
-                </a>
-            </div>
-
-            <div class="list__item-holder flex-align-right">
-                <a class="page__content-text text-title">
-                    Earn with us
-                </a>
-                <a class="page__content-text">
-                    Invest
-                </a>
-                <a class="page__content-text">
-                    Open shop
-                </a>
-                <a class="page__content-text">
-                    Referral program
-                </a>
-            </div>
-        </div>
-        <br>
-        <div class="list align-center list-low">
-            <div class="list__item-holder ">
-                <div class="page__content-text text-left">Follow our social media</div>
-                <div class="list__item-holder flow-row  list-sm">
-                    <a><img class="menu__image img-very-small" src="images/FBicon.svg"></a>
-                    <a><img class="menu__image img-very-small" src="images/INSTicon.svg"></a>
-                    <a><img class="menu__image img-very-small" src="images/YTicon.svg"></a>
-                    <a><img class="menu__image img-very-small" src="images/TWITicon.svg"></a>
-                </div>
-            </div>
-            <div class="list__item-holder">
-                <div class="page__content-text text-right">information@veslo.corp</div>
-                <div class="page__content-text text-title text-right" style="margin-top:70">+7(925)385-61-23</div>
-            </div>
-
-        </div>
-        <div class="page__buffer"></div>
-        <div class="page__buffer"></div>
-        <div class="page__buffer"></div>
-        <div class="list list-very-low border-top align-center">
-            <div class="list__item-holder list-very-low flex-align-left">
-                <div class="page__content-text">© 2010 - 2020 Veslo. All rights reserved</div>
-            </div>
-            <div class="list__item-holder list-very-low flex-align-right">
-                <div class="page__content-text">Stay Safe Stay Home</div>
-            </div>
-        </div>
-    </div>
+    <?php 
+    require 'templates/footer.php';
+    ?>
     <script src="scripts/main.js"></script>
     <script src="scripts/navigation.js"></script>
 </body>
