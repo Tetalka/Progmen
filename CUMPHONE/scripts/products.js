@@ -33,7 +33,7 @@ async function GetPhones(object, page = null, theme = 'white') {
 		phones = JSON.parse(phones);
 		if(phones) {
 			if(loading) hideLoading(loading);
-			if(phones[0] == 'OK') return(phones[1]);
+			if(phones['Type'] == 'OK') return(phones['Value']);
 		}
 	}
 }

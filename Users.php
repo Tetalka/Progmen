@@ -56,7 +56,7 @@ function SignUp($login, $password, $vpassword) {
         }
     }
     else {
-        say('Error', 'Password don\'t match');
+        say('Error', 'Passwords don\'t match');
     }
 }
 
@@ -65,10 +65,10 @@ $request = json_decode($request, true);
 require 'DB.php';
 if($request['type'] == 'Users') {
     $request = $request['data'];
-	if($request['action'] == 'sign in') {
+	if($request['Action'] == 'Sign in') {
 	SignIn($request['Login'], $request['Password']);
 	}
-	else if ($request['action'] == 'sign up') SignUp($request['Login'], $request['Password'], $request['VPassword']);
+	else if ($request['Action'] == 'Sign up') SignUp($request['Login'], $request['Password'], $request['VPassword']);
 }
 else say('Error', 'Bad_request');
 ?>

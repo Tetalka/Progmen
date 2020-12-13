@@ -28,7 +28,7 @@ function arrayContains($array, $string) {
 }
 
 function say($type = null, $message = null) {
-    echo json_encode([$type, $message]);
+    echo json_encode(['Type' => $type, 'Value' => $message]);
 }
 
 function writeError($error) {

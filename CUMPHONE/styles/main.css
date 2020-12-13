@@ -54,7 +54,10 @@
 	z-index: -3;
 }
 
-
+.input-form__message {
+    color: #840f0f;
+    margin-top: 20px;
+}
 
 
 
