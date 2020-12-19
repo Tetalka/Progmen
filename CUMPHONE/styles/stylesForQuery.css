@@ -10,7 +10,8 @@
 }
 
 .filter{
-    text-align:center;
+    display: flex;
+    justify-content: center;
     width:100%;
     margin-top:150px;
 }
@@ -20,7 +21,6 @@
     border: 2px solid #09AA5D;
     box-sizing: border-box;
     border-radius: 9px;
-    line-height: 35px;
 }
 .filter_search{
     text-align:center;
@@ -29,6 +29,7 @@
 	border: 0px;
     background: rgba(0, 255, 133, 0.63);
     border-radius: 10px;
+    margin-left: 10px;
 }
 .filter__pic{
     height:20px;

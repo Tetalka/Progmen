@@ -43,5 +43,5 @@ function slide(index)
 
 
 document.getElementsByClassName('page__content-text text-title content-bottom link')[0].onclick = function() {
-window.location.href = 'products.html';
+window.location.href = 'products.php';
 };

@@ -4,19 +4,6 @@ function GetSrc(string) {
 	else return '/images/' + string;
 }
 
-function GetElement(teg, classes, text = '') {
-	let element = document.createElement(teg);
-	if(Array.isArray(classes)) {
-		for (let value of classes) {
-			element.classList.add(value);
-		}
-	}
-	else element.classList.add(classes);
-	if(text == null && teg == 'span') element.textContent = 'Not found';
-	else element.textContent = text;
-	return element;
-}
-
 async function GetPhones(object, page = null, theme = 'white') {
 	if(page) {
 		var loading = showLoading(page, theme);
@@ -35,6 +22,10 @@ async function GetPhones(object, page = null, theme = 'white') {
 			if(loading) hideLoading(loading);
 			if(phones['Type'] == 'OK') return(phones['Value']);
 		}
+	}
+	else {
+	    SayBefore('There is some technical difficulty', '.loading');
+	    hideLoading(loading);
 	}
 }
 
@@ -61,8 +52,7 @@ function hideLoading(loading) {
 	loading.parentNode.removeChild(loading);
 }
 
-async function ShowPhones(){
-let phones = await GetPhones({model: 'all'}, document.querySelector('.phones'));
+async function ShowPhones(phones){
     for(let i = 0; i < phones.length; i++) {
 		//phone
 		let phone = document.createElement('div');
@@ -110,7 +100,7 @@ let phones = await GetPhones({model: 'all'}, document.querySelector('.phones'));
 		{
 			let value = document.createElement('div');
 			value.classList.add('phone__sum');
-			value.textContent = phones[i]['Price'] + ' ₽';
+			value.textContent = phones[i]['Price'] + ' Р';//+ ' ' + String.fromCharCode('0x20bd');
 			let buy = document.createElement('input');
 			buy.classList.add('phone__cost_buy');
 			buy.type = 'button';
@@ -360,4 +350,7 @@ async function UpdatePhonePage(model, color, page) {
     ShowPhone(phone, page);
 }
 
-document.body.onload = ShowPhones();
+window.onload = async () => {
+    let phones = await GetPhones({model: 'all'}, document.querySelector('.phones'));
+    ShowPhones(phones);
+}

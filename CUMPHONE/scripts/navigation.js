@@ -1,5 +1,31 @@
 var inputForm = document.getElementsByClassName('input-form')[0];
 
+class LoginMenu {
+    constructor() {
+        this.Focused = false;
+        this.exit = GetElement('div', 'login-menu__item', 'Exit');
+        this.exit.addEventListener('mouseover', () => {
+            this.Focused = true;
+        });
+        this.exit.addEventListener('mouseout', () => {
+            this.Focused = false;
+        });
+        this.exit.addEventListener('click', () => {
+            window.location.href = 'products.php';
+        });
+    }
+    
+    getMenu() {
+        let menu = GetElement('div', 'login-menu');
+        for(let value in this) {
+            menu.appendChild(this.exit);
+        }
+        return menu;
+    }
+}
+
+const loginbutton = document.querySelector('.login');
+
 function changeLoginDisplay(){
 	inputForm.classList.toggle("disabled");
 	clearSay();
@@ -55,17 +81,42 @@ async function Post(type, data) {
 			}
 		}
 	}
+	else {
+	    SayBefore('There is some technical difficulty');
+	}
 }
 
 function OnAuthorise(login) {
     document.querySelector('.input-form__input.inplogin').value = '';
     document.querySelector('.input-form__input.password').value = '';
     document.querySelectorAll('.input-form__input.password')[1].value = '';
-    document.querySelector('.login').parentNode.removeChild(document.querySelector('.login'));
+    loginbutton.parentNode.removeChild(loginbutton);
     let login_block = document.createElement('div');
     login_block.classList.add('menu__item');
     login_block.classList.add('login');
     login_block.textContent = login;
+    let control = new LoginMenu();
+    menu = control.getMenu();
+    login_block.addEventListener('mouseover', () => {
+        control.Focused = true;
+    });
+    login_block.addEventListener('mouseout', () => {
+        control.Focused = false;
+    });
+    function setmenu() {
+        login_block.appendChild(menu);
+    }
+    function unsetmenu() {
+        login_block.removeEventListener('mouseover', setmenu);
+        login_block.removeEventListener('mouseout', unsetmenu);
+        setTimeout(() => { 
+            if(!control.Focused) login_block.removeChild(menu);
+            login_block.addEventListener('mouseover', setmenu);
+            login_block.addEventListener('mouseout', unsetmenu);
+        }, 300);
+    }
+    login_block.addEventListener('mouseover', setmenu);
+    login_block.addEventListener('mouseout', unsetmenu);
     document.querySelector('.menu.menu-right').appendChild(login_block);
 }
 
@@ -133,7 +184,7 @@ function AUTHORISE(){
 }
 
 document.getElementsByClassName('logo logo-input align-center')[0].onclick = function() {
-window.location.href = 'index.html';
+window.location.href = 'index.php';
 };
 
 
@@ -169,3 +220,16 @@ window.addEventListener("scroll",function(){
 	
 	elem.style.backgroundColor = `rgba(${color.r},${color.g},${color.b},${color.a})`;
 	});
+	
+function GetElement(teg, classes, text = '') {
+	let element = document.createElement(teg);
+	if(Array.isArray(classes)) {
+		for (let value of classes) {
+			element.classList.add(value);
+		}
+	}
+	else element.classList.add(classes);
+	if(text == null && teg == 'span') element.textContent = 'Not found';
+	else element.textContent = text;
+	return element;
+}

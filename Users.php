@@ -61,7 +61,7 @@ function SignUp($login, $password, $vpassword) {
             }
             else {
                 $result->free();
-                if($result = $link->query('INSERT INTO Clients VALUES (NULL, "' . $login . '", "' . $password . '");')) {
+                if($link->query('INSERT INTO Clients VALUES (NULL, "' . $login . '", "' . $password . '");')) {
                     say('Registration');
                 }
                 else {

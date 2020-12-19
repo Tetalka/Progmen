@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Progmen</title>
+        <meta charset='utf-8'>
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/stylesForQuery.css">
         <link rel="stylesheet" href="styles/products.css">
@@ -33,7 +34,7 @@
 		<?php 
 		require 'templates/footer.php';
 		?>
-        <script src="scripts/products.js"></script>
         <script src="scripts/navigation.js"></script>
+        <script src="scripts/products.js"></script>
     </body>
 </html>
