@@ -27,13 +27,11 @@ function SignIn($login, $password) {
 			if(password_verify($password, $value['Password'])) {
 				$link->close();
 				$response->Login = $login;
-				$response->Times = $_COOKIE['SignIn_times'];
 				say('Authorisation', $response);
 			}
 			else {
 			    setcookie('SignIn_times', $_COOKIE['SignIn_times']+1, time() + 900, '/', '', true, true);
 			    $response->Value = 'Invalid username or password';
-			    $response->Time = date('Y-m-d H:i:s', time()+900);
 				say('Error', $response);
 			}
 		}
@@ -45,38 +43,45 @@ function SignIn($login, $password) {
 		}
 		else {
 		write_error($link->error);
-		say('Error', 'Server_error');
+		$response->Value = 'Server_error';
+		say('Error', $response);
 		}
     }
 }
 
 function SignUp($login, $password, $vpassword) {
     global $user, $pass, $db;
+    $response = new stdClass;
     if($password == $vpassword) {
     $password = password_hash($password, PASSWORD_DEFAULT, ['memory_cost' => 2048, 'time_cost' => 4, 'threads' => 4]);
     $link = database('localhost', $user, $pass, $db);
         if($result = $link->query('SELECT Login FROM Clients WHERE Login = \'' . $login . '\';')) {
             if($result->num_rows > 0) {
-                say('Error', 'Login is already exist');
+                $response->Value = 'Login already exists';
+                say('Error', $response);
             }
             else {
                 $result->free();
                 if($link->query('INSERT INTO Clients VALUES (NULL, "' . $login . '", "' . $password . '");')) {
+                    setcookie('SignUp_times', $_COOKIE['SignUp_times']+1, time() + 86400, '/', '', true, true);
                     say('Registration');
                 }
                 else {
-                    say('Error', 'Server_error');
+                    $response->Value = 'Server_error';
+                    say('Error', $response);
     	            writeError('Insert error (' . $link->errno . ') ' . $link->error);
                 }
             }
         }
         else {
-            say('Error', 'Server_error');
+            $response->Value = 'Server_error';
+            say('Error', $response);
     	   writeError('Insert error (' . $link->errno . ') ' . $link->error);
         }
     }
     else {
-        say('Error', 'Passwords don\'t match');
+        $response->Value = 'Passwords don\'t match';
+        say('Error', $response);
     }
 }
 
@@ -94,16 +99,12 @@ if($request['Type'] == 'Users') {
     }
 	else if ($request['Action'] == 'Sign up') {
 	   $vpassword = substr($request['VPassword'], 0, 55);
-	   if (!isset($_COOKIE['SignUp_times']))
-	   setcookie('SignUp_times', 0, strtotime('+1 day'), '/', '', true, true);
-	   else  {
+	   	   if (!isset($_COOKIE['SignUp_times'])) setcookie('SignUp_times', 0, time() + 86400, '/', '', true, true);
 	       if($_COOKIE['SignUp_times'] > 2) say('Error', ['Too much times of registrations', 'You can repeat it again in 1 day']);
 	       else {
-	           setcookie('SignUp_times', 0, time() + 86400, '/', '', true, true);
 	           SignUp($login, $password, $vpassword);
 	       }
-	   }
-	}
+	    }
 	else say('Error', 'Bad_request');
 }
 else say('Error', 'Bad_request');
