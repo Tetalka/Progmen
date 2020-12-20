@@ -21,6 +21,7 @@
     border: 2px solid #09AA5D;
     box-sizing: border-box;
     border-radius: 9px;
+    padding-left: 10px;
 }
 .filter_search{
     text-align:center;

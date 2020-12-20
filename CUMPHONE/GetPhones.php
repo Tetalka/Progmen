@@ -4,13 +4,22 @@
 	$pass = 'Progaman4.5~';
 	$db = 'id15446174_progmen';
 
-function getAll() {
+function getAll($filter = '') {
     global $user, $pass, $db;
         $phones = array();
     $link = database('localhost', $user, $pass, $db);
-        if ($result = $link->query("SELECT Model, Diagonal, Display, Resolution, Processor, Cores, ROM, RAM, Camera, Face_image, Price FROM `Products`;")) {
+    $query = 'SELECT Model, Diagonal, Display, Resolution, Processor, Cores, ROM, RAM, Camera, Face_image, Price FROM `Products`';
+    if($filter !== '') {
+        $query = $query . ' WHERE Model LIKE "%' . $filter . '%"';
+    }
+        if ($result = $link->query($query . ";")) {
+            if($result->num_rows == 0) {
+                return false;
+            }
+            else {
             $i = 0;
             while($phone = $result->fetch_array(MYSQLI_ASSOC)) {
+                $phones[$i] = new stdclass;
                 $phones[$i]->Model = $phone['Model'];
                 $phones[$i]->Display = $phone['Diagonal'] . ' ' . $phone['Display'] . ' ' . $phone['Resolution'];
                 $phones[$i]->Processor = $phone['Processor'] . ' (' . $phone['Cores'] . ' cores)';
@@ -23,11 +32,13 @@ function getAll() {
             }
         return $phones;
         }
+    }
     else {
     	say('Error', 'Server_error');
     	writeError('Query error (' . $link->errno . ') ' . $link->error);
     	}
-    }
+}
+
 function getModel($model, $color) {
     if($color == null) $color = 'Black';
         global $user, $pass, $db;
@@ -83,7 +94,7 @@ function getModel($model, $color) {
             say('Error', 'Server_error');
     	    writeError('Query error (' . $link->errno . ') ' . $link->error);
         }
-    }
+}
 
 $request = file_get_contents('php://input');
 $request = json_decode($request, true);
@@ -91,7 +102,12 @@ if($request['type'] == 'GetPhones') {
     $request = $request['object'];
     require 'DB.php';
 	if($request['model'] == 'all') {
-	say('OK', getAll());
+	    if(isset($request['filter'])) {
+	        $response = getAll(substr($request['filter'], 0, 60));
+	        if($response) say('OK', $response);
+	        else say('Error', 'No such models');
+	    }
+	    else say('OK', getAll());
 	}
 	else if ($request['model']) say('OK', getModel($request['model'], $request['color']));
 }

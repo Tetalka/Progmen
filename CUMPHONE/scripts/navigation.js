@@ -1,5 +1,20 @@
 var inputForm = document.getElementsByClassName('input-form')[0];
 
+class Menu {
+    constructor(block) {
+        this.block = block;
+    }
+    
+    //items is Map
+    build(items) {
+        for(let item of items) {
+            //item[0] is element, item[1] is function (event handler of this element)
+            item[0].addEventListener('click', item[1]);
+            this.block.appendChild(item[0]);
+        }
+    }
+}
+
 class LoginMenu {
     constructor() {
         this.Focused = false;
@@ -145,6 +160,25 @@ function SayBefore(text, elemSelector = '.input-form__button', status = false) {
     else block.textContent = text;
     let button = document.querySelector(elemSelector);
     button.before(block);
+}
+
+function Say(text, elemSelector) {
+    clearSay();
+        let block = document.createElement('div');
+    block.classList.add('input-form__message-block');
+    if(!status) block.classList.add('input-form__message_error');
+    else block.classList.add('input-form__message_good');
+    if(Array.isArray(text)) {
+        for (let i = 0; i < text.length; i++) {
+        let message = document.createElement('span');
+        message.classList.add('input-form__message');
+        message.textContent = text[i];
+        block.appendChild(message);
+        }
+    }
+    else block.textContent = text;
+    let button = document.querySelector(elemSelector);
+    button.appendChild(block);
 }
 
 function clearSay() {

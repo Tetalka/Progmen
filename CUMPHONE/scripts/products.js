@@ -1,4 +1,4 @@
-
+//REFACTORING
 function GetSrc(string) {
 	if(string[4] == ':' || string[5] == ':') return string;
 	else return '/images/' + string;
@@ -16,11 +16,12 @@ async function GetPhones(object, page = null, theme = 'white') {
     body: JSON.stringify({type: 'GetPhones', object})
 	});
 	if(response.ok) {
-		let phones = await response.text();
-		phones = JSON.parse(phones);
-		if(phones) {
+		response = await response.text();
+		response = JSON.parse(response);
+		if(response) {
 			if(loading) hideLoading(loading);
-			if(phones['Type'] == 'OK') return(phones['Value']);
+			if(response['Type'] == 'OK') return(response['Value']);
+			if(response['Type'] == 'Error') return null;
 		}
 	}
 	else {
@@ -100,7 +101,7 @@ async function ShowPhones(phones){
 		{
 			let value = document.createElement('div');
 			value.classList.add('phone__sum');
-			value.textContent = phones[i]['Price'] + ' Р';//+ ' ' + String.fromCharCode('0x20bd');
+			value.textContent = phones[i]['Price'] + ' �';//+ ' ' + String.fromCharCode('0x20bd');
 			let buy = document.createElement('input');
 			buy.classList.add('phone__cost_buy');
 			buy.type = 'button';
@@ -318,7 +319,7 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 	let panel = document.createElement('div');
 	panel.classList.add('phone-page__panel-column');
 	let buy = GetElement('div', 'phone-page__buy', null);
-	let buy_price = GetElement('span', 'phone-page__price', phone['Price'] + ' ₽');
+	let buy_price = GetElement('span', 'phone-page__price', phone['Price'] + ' ?');
 	buy.appendChild(buy_price);
 	let buy_button = GetElement('button', 'phone-page__buy-button', 'Buy it now');
 	buy.appendChild(buy_button);
@@ -341,6 +342,13 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 	document.body.appendChild(page);
 }
 
+function ClearPhones() {
+    let chunk = document.querySelector('.phones');
+    for(let i = 0; i < chunk.childNodes.length;) {
+        chunk.removeChild(chunk.childNodes[0]);
+    }
+}
+
 async function UpdatePhonePage(model, color, page) {
     let pageChunk = page.childNodes;
     for(let i = 0; i < pageChunk.length;) {
@@ -353,4 +361,18 @@ async function UpdatePhonePage(model, color, page) {
 window.onload = async () => {
     let phones = await GetPhones({model: 'all'}, document.querySelector('.phones'));
     ShowPhones(phones);
+    let search = document.querySelector('.filter__text');
+    search.addEventListener('keyup', () => {
+        clearTimeout(search.timer);
+        search.timer = setTimeout(async () => {
+            ClearPhones();
+            if(search.value === '') phones = await GetPhones({model: 'all'});
+            else  phones = await GetPhones({model: 'all', filter: search.value});
+            if(phones) ShowPhones(phones);
+            else Say('No such models', '.phones');
+        }, 1250);
+    });
+    search.addEventListener('keydown', () => {
+        clearTimeout(search.timer);
+    });
 }
