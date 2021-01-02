@@ -54,25 +54,29 @@
 	z-index: -3;
 }
 
-.input-form__message-block {
+.message {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
-.input-form__message {
+.message__row {
     margin-bottom: 10px;
 }
 
-.input-form__message_error {
+.message__row_red {
     color: #840f0f;
 }
-
-.input-form__message_good {
+.message__row_white {
+	color: #fff;
+}
+.message__row_green {
     color: #0c6200;
 }
-
+.message__row_black {
+	color: #000;
+}
 
 
 
@@ -151,6 +155,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+	cursor: pointer;
 }
 .menu__image {
     height:40px;

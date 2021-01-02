@@ -216,19 +216,19 @@
 }
 
 .loading__point1 {
-
+	animation-delay: 0ms;
 }
 
 .loading__point2 {
-  animation-delay: 333ms;
+	animation-delay: 333ms;
 }
 .loading__point3 {
-  animation-delay: 666ms;
+	animation-delay: 666ms;
 }
 
 @keyframes animation_loading_black  {
-  0% {background-color: #000}
-  100% {background-color: transparent}
+	0% {background-color: #000}
+	100% {background-color: transparent}
 }
 
 @keyframes animation_loading_white {

@@ -1,59 +1,5 @@
-//REFACTORING
-function GetSrc(string) {
-	if(string[4] == ':' || string[5] == ':') return string;
-	else return '/images/' + string;
-}
 
-async function GetPhones(object, page = null, theme = 'white') {
-	if(page) {
-		var loading = showLoading(page, theme);
-	}
-	let response = await fetch('GetPhones.php',{
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({type: 'GetPhones', object})
-	});
-	if(response.ok) {
-		response = await response.text();
-		response = JSON.parse(response);
-		if(response) {
-			if(loading) hideLoading(loading);
-			if(response['Type'] == 'OK') return(response['Value']);
-			if(response['Type'] == 'Error') return null;
-		}
-	}
-	else {
-	    SayBefore('There is some technical difficulty', '.loading');
-	    hideLoading(loading);
-	}
-}
-
-function showLoading(page, theme) {
-	let loading = GetElement('div', 'loading');
-	if (theme == 'white') {
-	var point1 = GetElement('div', ['loading__point_white', 'loading__point1']);
-	var point2 = GetElement('div', ['loading__point_white', 'loading__point2']);
-	var point3 = GetElement('div', ['loading__point_white', 'loading__point3']);
-	}
-	else {
-	var point1 = GetElement('div', ['loading__point_black', 'loading__point1']);
-	var point2 = GetElement('div', ['loading__point_black', 'loading__point2']);
-	var point3 = GetElement('div', ['loading__point_black', 'loading__point3']);
-	}
-	loading.appendChild(point1);
-	loading.appendChild(point2);
-	loading.appendChild(point3);
-	page.appendChild(loading);
-	return loading;
-}
-
-function hideLoading(loading) {
-	loading.parentNode.removeChild(loading);
-}
-
-async function ShowPhones(phones){
+function ShowPhones(phones){
     for(let i = 0; i < phones.length; i++) {
 		//phone
 		let phone = document.createElement('div');
@@ -67,7 +13,7 @@ async function ShowPhones(phones){
 		
 			image.classList.add('phone__image');
 			let img = document.createElement('img');
-			img.src = GetSrc(phones[i]['Face_image']);
+			img.src = phones[i]['Image'];
 			image.appendChild(img);
 			phone.appendChild(image);
 		}
@@ -82,11 +28,12 @@ async function ShowPhones(phones){
 				model.classList.add(classes[0]);
 				model.textContent = phones[i][values[0]];
 				model.addEventListener('click', async function() {
-				let phone = await GetPhones({model: model.textContent});
-    			ShowPhone(phone);
+				let ajax = new AJAX('GetPhones.php', 'GetPhones');
+				let phone = await ajax.send({Model: model.textContent});
+				if(phone.Data) ShowPhone(phone.Data);
     		});
 				properties.appendChild(model);
-			for(var j = 1; j < 6; j++) {
+			for(let j = 1; j < 6; j++) {
 				let block = document.createElement('div');
 				block.classList.add(classes[j]);
 				block.textContent = values[j] + ': ' + phones[i][values[j]];
@@ -101,7 +48,7 @@ async function ShowPhones(phones){
 		{
 			let value = document.createElement('div');
 			value.classList.add('phone__sum');
-			value.textContent = phones[i]['Price'] + ' â';//+ ' ' + String.fromCharCode('0x20bd');
+			value.textContent = phones[i]['Price'] + ' ' + String.fromCharCode('0x20bd');
 			let buy = document.createElement('input');
 			buy.classList.add('phone__cost_buy');
 			buy.type = 'button';
@@ -116,35 +63,12 @@ async function ShowPhones(phones){
 }
 
 function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
-
+	
 	//phone images (slider)
-	let images_column = document.createElement('div');
-	images_column.classList.add('phone-page__images-column');
-	let image_main_wrap = GetElement('div', 'phone-page__image-wrap');
-	let image_main = document.createElement('img');
-	image_main.classList.add('phone-page__image');
-	image_main.src = GetSrc(phone['Face_image']);
-	image_main.addEventListener('click', function() {
-			let main = document.querySelector('.phone-page__main-image');
-			document.querySelector('.phone-page__image_active').classList.remove('phone-page__image_active');
-			main.src = this.src;
-			this.classList.add('phone-page__image_active');
-		});
-	let image_main_placeholder = GetElement('div', ['phone-page__image', 'phone-page__image-loading']);
-	let image_main_loading = showLoading(image_main_placeholder, 'black');
-	image_main_wrap.appendChild(image_main_placeholder);
-	image_main.onload = () => {
-		hideLoading(image_main_loading);
-		image_main_wrap.removeChild(image_main_placeholder);
-		image_main.classList.add('phone-page__image_active');
-	}
-		image_main_wrap.appendChild(image_main);
-		images_column.appendChild(image_main_wrap);
-	for(let i = 0; i < phone['Images'].length; i++) {
+	let images_column = GetElement('div', 'phone-page__images-column');
+	for(let img in phone['Images']) {
 		let image_wrap = GetElement('div', 'phone-page__image-wrap');
-		let image = document.createElement('img');
-		image.src = GetSrc(phone['Images'][i]);
-		image.classList.add('phone-page__image');
+		let image = GetImg('phone-page__image', phone['Images'][img]);
 		image.addEventListener('click', function() {
 			let main = document.querySelector('.phone-page__main-image');
 			document.querySelector('.phone-page__image_active').classList.remove('phone-page__image_active');
@@ -152,10 +76,10 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 			this.classList.add('phone-page__image_active');
 		});
 		let image_placeholder = GetElement('div', ['phone-page__image', 'phone-page__image-loading']);
-		let image_loading = showLoading(image_placeholder, 'black');
+		let image_loading = new Loading(image_placeholder, 'loading__point_black');
+		image_loading.show();
 		image_wrap.appendChild(image_placeholder);
 		image.onload = () => {
-			hideLoading(image_loading);
 			image_wrap.removeChild(image_placeholder);
 		}
 		image_wrap.appendChild(image);
@@ -164,51 +88,44 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 	page.appendChild(images_column);
 
 	//phone main image
-	let main_image_column = document.createElement('div');
-	main_image_column.classList.add('phone-page__main-image-column');
+	let main_image_column = GetElement('div', 'phone-page__main-image-column')
 	let main_image_wrap = GetElement('div', 'phone-page__main-image-wrap');
-	let image = document.createElement('img');
-	image.classList.add('phone-page__main-image');
-	image.src = GetSrc(phone['Face_image']);
+	let image = GetImg('phone-page__main-image', phone['Images'][0]);
 	let main_image_placeholder = GetElement('div', ['phone-page__main-image', 'phone-page__image-loading']);
-	let main_image_loading = showLoading(main_image_placeholder, 'black');
+	let main_image_loading = new Loading(main_image_placeholder, 'loading__point_black');
+	main_image_loading.show();
 	main_image_wrap.appendChild(main_image_placeholder);
 	image.onload = () => {
-		hideLoading(main_image_loading);
 		main_image_wrap.removeChild(main_image_placeholder);
 	}
 	main_image_wrap.appendChild(image);
 	main_image_column.appendChild(main_image_wrap);
 	//phone color selecting
-	let color_block = document.createElement('div');
-	color_block.classList.add('phone-page__colors');
-	for(let i = 0; i < phone['Colors'].length; i++) {
-	    let div = document.createElement('div');
-	    div.classList.add('phone-page__color-block');
-	    let box = document.createElement('div');
-	    box.classList.add('phone-page__color-box');
-	    let color = document.createElement('div')
-	    color.classList.add('phone-page__color');
-	    color.style.backgroundColor = phone['Colors_value'][i];
+	let color_block = GetElement('div', 'phone-page__colors');
+	for(let entry in phone['Colors']) {
+	    let block = GetElement('div', 'phone-page__color-block');
+	    let box = GetElement('div', 'phone-page__color-box');
+	    let color = GetElement('div', 'phone-page__color')
+	    color.style.backgroundColor = phone['Colors'][entry];
 	    box.appendChild(color);
-	    div.appendChild(box);
-	    let value = GetElement('span', 'phone-page__color-value', phone['Colors'][i]);
-	    div.appendChild(value);
+	    block.appendChild(box);
+	    let value = GetElement('span', 'phone-page__color-value', entry);
+	    block.appendChild(value);
 	    let title = phone['Model'];
-	    div.addEventListener('click', () => {UpdatePhonePage(title, value.textContent, page);});
-	    div.addEventListener('mouseover', () => {
+	    block.addEventListener('click', () => {UpdatePhonePage(title, value.textContent, page);});
+	    block.addEventListener('mouseover', () => {
 	        box.classList.add('phone-page__color-box_active');
 	        color.classList.add('phone-page__color_active');
 	        box.style.borderColor = color.style.backgroundColor;
 	        value.style.color = color.style.backgroundColor;
 	    });
-	    div.addEventListener('mouseout', () => {
+	    block.addEventListener('mouseout', () => {
 	        box.classList.remove('phone-page__color-box_active');
 	        color.classList.remove('phone-page__color_active');
 	        box.style.borderColor = '';
 	        value.style.color = '';
 	    });
-	    color_block.appendChild(div);
+	    color_block.appendChild(block);
 	}
 	main_image_column.appendChild(color_block);
 	page.appendChild(main_image_column);
@@ -221,8 +138,7 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 		info_column.appendChild(title);
 
 		//screen block
-		let screen_block = document.createElement('div');
-		screen_block.classList.add('phone-page__info-block');
+		let screen_block = GetElement('div', 'phone-page__info-block');
 		let screen_block_title = GetElement('h3', 'phone-page__info-block-title', 'Screen:');
 		screen_block.appendChild(screen_block_title);
 		let resolution = GetElement('div', 'phone-page__info-label', 'Resolution: ');
@@ -240,8 +156,7 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 		info_column.appendChild(screen_block);
 
 		//memory and processor block
-		let memory_block = document.createElement('div');
-		memory_block.classList.add('phone-page__info-block');
+		let memory_block = GetElement('div', 'phone-page__info-block');
 		let memory_block_title = GetElement('h3', 'phone-page__info-block-title', 'Memory & Processor:');
 		memory_block.appendChild(memory_block_title);
 		let processor = GetElement('div', 'phone-page__info-label', 'Processor: ');
@@ -249,11 +164,11 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 		processor.appendChild(processor_value);
 		memory_block.appendChild(processor);
 		let rom = GetElement('div', 'phone-page__info-label', 'ROM: ');
-		let rom_value = GetElement('span', 'phone-page__info-value', phone['ROM'] + 'Gb');
+		let rom_value = GetElement('span', 'phone-page__info-value', phone['ROM']);
 		rom.appendChild(rom_value);
 		memory_block.appendChild(rom);
 		let ram = GetElement('div', 'phone-page__info-label', 'RAM: ');
-		let ram_value = GetElement('span', 'phone-page__info-value', phone['RAM'] + 'Gb');
+		let ram_value = GetElement('span', 'phone-page__info-value', phone['RAM']);
 		ram.appendChild(ram_value);
 		memory_block.appendChild(ram);
 		let cores = GetElement('div', 'phone-page__info-label', 'Cores of processor: ');
@@ -267,8 +182,7 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 		info_column.appendChild(memory_block);
 
 		//camera block
-		let camera_block = document.createElement('div');
-		camera_block.classList.add('phone-page__info-block');
+		let camera_block = GetElement('div', 'phone-page__info-block');
 		let camera_block_title = GetElement('h3', 'phone-page__info-block-title', 'Camera:');
 		camera_block.appendChild(camera_block_title);
 		let mainCum = GetElement('div', 'phone-page__info-label', 'Main camera: ');
@@ -276,37 +190,35 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 		mainCum.appendChild(mainCum_value);
 		camera_block.appendChild(mainCum);
 		let frontCum = GetElement('div', 'phone-page__info-label', 'Front camera: ');
-		let frontCum_value = GetElement('span', 'phone-page__info-value', phone['Front_camera']);
+		let frontCum_value = GetElement('span', 'phone-page__info-value', phone['FrontCamera']);
 		frontCum.appendChild(frontCum_value);
 		camera_block.appendChild(frontCum);
 		info_column.appendChild(camera_block);
 
 		//communication block
-		let communication_block = document.createElement('div');
-		communication_block.classList.add('phone-page__info-block');
+		let communication_block = GetElement('div', 'phone-page__info-block');
 		let communication_block_title = GetElement('h3', 'phone-page__info-block-title', 'Communication: ');
 		communication_block.appendChild(communication_block_title);
 		let wireless = GetElement('div', 'phone-page__info-label', 'Wireless interface: ');
-		let wireless_value = GetElement('span', 'phone-page__info-value', phone['Wireless_interface']);
+		let wireless_value = GetElement('span', 'phone-page__info-value', phone['WirelessInterface']);
 		wireless.appendChild(wireless_value);
 		communication_block.appendChild(wireless);
 		let unit = GetElement('div', 'phone-page__info-label', 'Unit of Wi-Fi: ');
-		let unit_value = GetElement('span', 'phone-page__info-value', phone['Unit_of_WiFi']);
+		let unit_value = GetElement('span', 'phone-page__info-value', phone['UnitOfWiFi']);
 		unit.appendChild(unit_value);
 		communication_block.appendChild(unit);
 		let numsim = GetElement('div', 'phone-page__info-label', 'Number of SIM-card: ');
-		let numsim_value = GetElement('span', 'phone-page__info-value', phone['Numbers_of_SIMCard']);
+		let numsim_value = GetElement('span', 'phone-page__info-value', phone['NumbersOfSIMCard']);
 		numsim.appendChild(numsim_value);
 		communication_block.appendChild(numsim);
 		let typesim = GetElement('div', 'phone-page__info-label', 'Type of SIM: ');
-		let typesim_value = GetElement('span', 'phone-page__info-value', phone['Type_of_SIM']);
+		let typesim_value = GetElement('span', 'phone-page__info-value', phone['TypeOfSIM']);
 		typesim.appendChild(typesim_value);
 		communication_block.appendChild(typesim);
 		info_column.appendChild(communication_block);
 
 		//battery block
-		let battery_block = document.createElement('div');
-		battery_block.classList.add('phone-page__info-block');
+		let battery_block = GetElement('div', 'phone-page__info-block');
 		let battery_block_title = GetElement('h3', 'phone-page__info-block-title', 'Battery: ');
 		let battery_value = GetElement('span', 'phone-page__info-value', phone['Battery'] + 'mAh');
 		battery_block_title.appendChild(battery_value);
@@ -316,15 +228,14 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 	page.appendChild(info_column);
 
 	//panel
-	let panel = document.createElement('div');
-	panel.classList.add('phone-page__panel-column');
-	let buy = GetElement('div', 'phone-page__buy', null);
-	let buy_price = GetElement('span', 'phone-page__price', phone['Price'] + ' ?');
+	let panel = GetElement('div', 'phone-page__panel-column');
+	let buy = GetElement('div', 'phone-page__buy');
+	let buy_price = GetElement('span', 'phone-page__price', phone['Price'] + ' ' + String.fromCharCode('0x20bd'));
 	buy.appendChild(buy_price);
 	let buy_button = GetElement('button', 'phone-page__buy-button', 'Buy it now');
 	buy.appendChild(buy_button);
 	panel.appendChild(buy);
-	let notify = GetElement('div', 'phone-page__notify', null)
+	let notify = GetElement('div', 'phone-page__notify')
 	let notify_label = GetElement('span', 'phone-page__notify-label', 'Are you want know when price down?');
 	notify.appendChild(notify_label);
 	let notify_button = GetElement('button', 'phone-page__notify-button', 'Notify');
@@ -338,8 +249,9 @@ function ShowPhone(phone, page = GetElement('div', 'phone-page')) {
 	    document.body.removeChild(document.querySelector('.phone-page'));
 	});
 	page.appendChild(exit);
-
+	
 	document.body.appendChild(page);
+	document.querySelectorAll('.phone-page__image')[1].classList.add('phone-page__image_active');
 }
 
 function ClearPhones() {
@@ -354,22 +266,34 @@ async function UpdatePhonePage(model, color, page) {
     for(let i = 0; i < pageChunk.length;) {
         page.removeChild(pageChunk[i]);
     }
-	let phone = await GetPhones({model: model, color: color}, page, 'black');
-    ShowPhone(phone, page);
+	let ajax = new AJAX('GetPhones.php', 'GetPhones');
+	ajax.setLoading(page, 'loading__point_black');
+	ajax.loading.show();
+	let phone = await ajax.send({Model: model, Color: color});
+	if(phone) ajax.loading.hide();
+    if(phone.Data) ShowPhone(phone.Data, page);
 }
 
 window.onload = async () => {
-    let phones = await GetPhones({model: 'all'}, document.querySelector('.phones'));
-    ShowPhones(phones);
+	let ajax = new AJAX('GetPhones.php', 'GetPhones');
+	ajax.setLoading(document.querySelector('.phones'), 'loading__point_white');
+	ajax.loading.show();
+    let phones = await ajax.send({Model: 'All'});
+	if(phones) ajax.loading.hide();
+	if(phones.Data) ShowPhones(phones.Data);
     let search = document.querySelector('.filter__text');
     search.addEventListener('keyup', () => {
         clearTimeout(search.timer);
         search.timer = setTimeout(async () => {
             ClearPhones();
-            if(search.value === '') phones = await GetPhones({model: 'all'});
-            else  phones = await GetPhones({model: 'all', filter: search.value});
-            if(phones) ShowPhones(phones);
-            else Say('No such models', '.phones');
+			let ajax = new AJAX('GetPhones.php', 'GetPhones');
+			ajax.setLoading(document.querySelector('.phones'), 'loading__point_white');
+			ajax.loading.show();
+            if(search.value === '') phones = await ajax.send({Model: 'All'});
+            else phones = await ajax.send({Model: 'All', Filter: search.value});
+			if(phones) ajax.loading.hide();
+            if(phones.Data) ShowPhones(phones.Data);
+            else Say('No such models', document.querySelector('.phones'), 'message__row_white');
         }, 1250);
     });
     search.addEventListener('keydown', () => {
