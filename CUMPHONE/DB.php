@@ -1,15 +1,5 @@
 <?php
-/*class Database {
-    private $url, $user, $pass, $database;
-    public function Database($url, $user, $pass, $database) {
-        $this->url = $url;
-        $this->user = $user;
-        $this->pass = $pass;
-        $this->db = $database;
-        $link = new mysqli($this->url, $this->user, $this->pass, $this->db);
-    return $link;
-    }
-}*/
+
 class Database {
 	function __construct($url, $user, $pass, $db) {
 		$this->url = $url;
@@ -54,8 +44,8 @@ class Database {
 $progman = new Database('localhost', 'id15446174_progman', 'Progaman4.5~', 'id15446174_progmen');
 
 function arrayContains($array, $string) {
-    for($i = 0; $i < count($array); $i++) {
-        if($array[$i] == $string) return true;
+    foreach($array as $elem){
+        if($elem == $string) return true;
     }
     return false;
 }
