@@ -8,8 +8,8 @@
 			<div class="list__item-holder buffer-for-footer">
 				<input class="input-form__input inplogin" placeholder="Login" maxlength='55'>
 				<input type="password" class="input-form__input password" placeholder="Password" maxlength='55'>
-				<input type="password" class="input-form__input password disabled" placeholder="Confirm Password" maxlength='55'>
-				<input type="button" class="input-form__button si link" value="SIGN IN" onclick="AUTHORISE()">
+				<input type="password" class="input-form__input password confirm-password disabled" placeholder="Confirm Password" maxlength='55'>
+				<input type="button" class="input-form__button si link" value="SIGN IN" onclick="GoUser()">
 				<a class="page__content-text text-small forgot-password link text-black"> FORGOT PASSWORD?</a>
 			
 				<a class="page__content-text text-title link text-black" onclick="changeSigning(this)"> REGISTRATION</a>

@@ -6,7 +6,7 @@
         <html>
             <div class="header">
             <div class="header__holder">
-                <a class="logo" href="index.html">
+                <a class="logo" href=<?php echo $index ?>>
                     <img src="images/VESLO.svg">
                 </a>
                 <div class="menu">
