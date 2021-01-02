@@ -60,10 +60,21 @@ function arrayContains($array, $string) {
     return false;
 }
 
-function say($type = null, $message = null) {
-    if($message) {
-    echo json_encode(['Type' => $type, 'Value' => $message]);
-    }
-    else echo json_encode(['Type' => $type]);
+class Response {
+	function __construct() {
+		$this->Errors = array();
+	}
+	
+	function writeData($data) {
+		$this->Data = $data;
+	}
+	
+	function writeError($error) {
+		array_push($this->Errors, $error); 
+	}
+	
+	function send() {
+		echo json_encode($this);
+	}
 }
 ?>
