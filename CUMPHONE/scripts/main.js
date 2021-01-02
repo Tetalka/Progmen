@@ -18,12 +18,12 @@ for (var i = 1; i < sliderElements.length; i++)
 setInterval(increaseIndex, 6000);
 
 function increaseIndex(){
-	var inbex = currentIndex;
+	var index = currentIndex;
 	
-	inbex+=1;
-	if (inbex == sliderElements.length) inbex = 0;
+	index+=1;
+	if (index == sliderElements.length) index = 0;
 	
-	slide(inbex);
+	slide(index);
 }
 
 function slide(index)
